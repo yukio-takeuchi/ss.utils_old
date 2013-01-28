@@ -10,7 +10,7 @@ getReport<-getReport.sso<-function(repfile="Report.sso",oldStyle=TRUE,interactiv
     report<-lapply(repfile,readLinesInteract,interactive=interactive)
   }else{
     # check if file(s) exist
-    # 
+    #
     lapply(repfile,FUN=function(filename){if(!file.exists(filename))stop(paste(filename, "is not exist"))}) # 2013/01/28
     report<-lapply(repfile,readLines)  # 2011/02/11
   }
@@ -18,10 +18,10 @@ getReport<-getReport.sso<-function(repfile="Report.sso",oldStyle=TRUE,interactiv
 
   if(!oldStyle){
     report<-lapply(report,
-              FUN=function(z){
-                      blankLines<-grep(value=FALSE,pattern="^$",x=z)
-                      return(list(report=z,blankLines=blankLines))
-                      })
+          FUN=function(z){
+            blankLines<-grep(value=FALSE,pattern="^$",x=z)
+            return(list(report=z,blankLines=blankLines))
+            })
     out<-list(report=report,n=length(report))
     class(out)<-"report.list"
     return(out)
@@ -94,21 +94,25 @@ componentEndL<-function(headerL,blankLines){
   read.table.texts<-function(texts,header=FALSE,skip=0,colClasses=NA,col.names=NULL){
     nrow<-length(texts)
     start<-1+(header)+skip
+    if(start>nrow)start<-1
     texts.lists<-strsplit(texts[start:nrow],split="[[:blank:]]+")
     row.length<-sapply(texts.lists,length)
-    if(!all(row.length==row.length[1])){
-      cat("length of elements is different in some line(s)\n")
-      cat("HERE98\n")
+    if(length(texts)==1){
+      temp<-texts.lists[[1]]
+    }else if(!all(row.length==row.length[1])){
+      cat("HERE100 length of elements is different in some line(s)\n")
+    #  cat("HERE98\n")
       browser()
+    }else{
+      temp<-lapply(1:row.length[1],FUN=function(i){sapply(texts.lists,FUN=function(x){x[i]})})
+      temp<-as.data.frame(temp,stringsAsFactors =FALSE)
+      names(temp)<-paste("V",1:row.length[1],sep="")
+      if(header)names(temp)<-paste(unlist(strsplit(texts.lists[[(header)+skip]],split="[[:blank:]]+")))
+      if(!is.null(col.names) && length(col.names)>=row.length[1])names(temp)<-col.names[1:row.length[1]]
+      cat("HERE102\n")
+      print(names(temp))
+      cat("\n")
     }
-    temp<-lapply(1:row.length[1],FUN=function(i){sapply(texts.lists,FUN=function(x){x[i]})})
-    temp<-as.data.frame(temp,stringsAsFactors =FALSE)
-    names(temp)<-paste("V",1:row.length[1],sep="")
-    if(header)names(temp)<-paste(unlist(strsplit(texts.lists[[(header)+skip]],split="[[:blank:]]+")))
-    if(!is.null(col.names) && length(col.names)>=row.length[1])names(temp)<-col.names[1:row.length[1]]
-    cat("HERE102\n")
-    print(names(temp))
-    cat("\n")
     return(temp)
   }
 
@@ -117,7 +121,7 @@ componentEndL<-function(headerL,blankLines){
     cat("HERE93\nlength(texts)=")
     print(length(texts))
     cat("\n")
-    
+
     Tfile=file()
     on.exit(if(isOpen(Tfile)){close(Tfile)})
     zz<-cat(texts,file=Tfile,sep="\n")
@@ -1304,12 +1308,17 @@ plotEffNts<-function(report,fleets=NULL,size.kind=c("LEN","AGE","SIZE")){
 
 
 getAgecomp.ss3.1.x <- function(report,blankLines=NULL,size.kind=c("LEN","AGE","SIZE")){
-  
-  desc <- ifelse(len==TRUE,"^FIT_LEN_COMPS","^FIT_AGE_COMPS")
-  desc<-if(size.kind=="LEN"){"^FIT_LEN_COMPS"}
-  desc<-if(size.kind=="AGE"){"^FIT_AGE_COMPS"}
-  desc<-if(size.kind=="SIZE"){"^FIT_SIZE_COMPS"}
-  
+
+#  desc <- ifelse(len==TRUE,"^FIT_LEN_COMPS","^FIT_AGE_COMPS")
+  desc1<-if("LEN" %in% size.kind){"^FIT_LEN_COMPS"}
+  desc2<-if("AGE" %in% size.kind){"^FIT_AGE_COMPS"}
+  desc3<-if("SIZE" %in% size.kind){"^FIT_SIZE_COMPS"}
+  desc<-cbind(desc1,desc2,desc3)
+  cat("HERE1312\nheader.char=")
+  print(desc)
+  cat("\nsize.kind=")
+  print(size.kind)
+  cat("\n")
 
   if(is.null(blankLines)){
     blankLines<-grep(value=FALSE,pattern="^$",x=report)
@@ -1328,8 +1337,8 @@ getAgecomp.ss3.1.x <- function(report,blankLines=NULL,size.kind=c("LEN","AGE","S
   }
   else if(size.kind=="SIZE"){
     colnames(res[[1]]) <-
-      c("Fleet", "Yr", "Seas", "Method", "Gender", "Mkt", "Nsamp", "effN", "Like")    
-  } 
+      c("Fleet", "Yr", "Seas", "Method", "Gender", "Mkt", "Nsamp", "effN", "Like")
+  }
   return(res)
 }
 
@@ -4155,9 +4164,9 @@ plotPearson<-function(repfile="Report.sso",report=NULL,filename=NULL,type=NULL,l
   require(RColorBrewer)|| stop("package RColorBrewer is required")
   require(locfit)|| stop("package locfit is required")
 
-  
+
   if(is.null(report))report<-getReport(repfile=repfile)
-  
+
   if(plot.new){
     if(is.null(type))type="windows"
     if(is.null(filename)){
@@ -4289,7 +4298,7 @@ plotPearson<-function(repfile="Report.sso",report=NULL,filename=NULL,type=NULL,l
   if(size.fit){
     tmp.fnc(report=report,Kind="SIZE",compReportFile=compReportFile)
   }
-  
+
 }
 
 

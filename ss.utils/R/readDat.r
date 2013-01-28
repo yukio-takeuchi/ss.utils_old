@@ -12,99 +12,57 @@
 readDat<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FALSE,footer.char=NULL,col.names=NULL,
                         skip.col.names=0,checkEndRec=FALSE,colClasses=NULL,as.numeric.as.possible=FALSE,as.numeric.col=NULL){
   if(is.null(report))stop("report is missing in readDat")
-#  cat("HERE13 in readDat\n")
-#  cat("as.numeric.as.possible=",as.numeric.as.possible,"\n")
-#  cat("is.oldStyle(report)=",is.oldStyle(report),"\n")
+
   headerL<-getHeaderL(header.char=header.char,report=report)
-#  browser()
   if(is.oldStyle(report)){
     res<-readDat.trad(header.char=header.char,report=report,blankLines=blankLines,skip=skip,header=header,footer.char=footer.char,
     col.names=col.names,skip.col.names=skip.col.names,checkEndRec=checkEndRec,colClasses=colClasses,as.numeric.as.possible=as.numeric.as.possible,
     as.numeric.col=as.numeric.col,headerL=headerL)
     return(res)
   }else{
-#    browser()
     if(is.null(footer.char)){
       EL<-mapply(FUN=function(x,y){
-        #cat("HERE\n");browser();
         res<-componentEndL(x,y$blankLines)
-        #;cat("res=",res,"\n");
         return(res)},headerL[[1]],report[[1]])
     }else{
       EL<-mapply(FUN=function(x,y){
             x+grep(x=y[x:length(y)],value=FALSE,pattern=footer.char)[1]-1},headerL,lapply(report[[1]],"[[",1)
             )
     }
-#    cat("EL=",EL,"\n")
-#    browser()
-#    require(plyr)
-#    cat("HERE0\n");browser()
-    if(0){
-    component<-lapply(1:length(EL),FUN=function(i){
 
+    tmp.fn<-
+      function(x,y,z){
+          comp.tmp<-x[(y+1):z]
+          cat("HERE\n");browser()
+          if(header||is.null(col.names))col.names<-name.label<-unlist(strsplit(comp.tmp[skip.col.names+1],split="[[:blank:]]+"))
+          comp.tmp<-read.table.texts(texts=comp.tmp,skip=skip+1,header=FALSE)
 
-            comp.tmp<-report[[i]][[1]][[1]][(headerL[[1]][i]+1):EL[i]]
-#            cat("HERE1\n");browser()
-            if(header||is.null(col.names))col.names<-name.label<-unlist(strsplit(comp.tmp[skip.col.names+1],split="[[:blank:]]+"))
-            comp.tmp<-read.table.texts(texts=comp.tmp,skip=skip+1,header=FALSE)
-
-            #if(header)names(comp.tmp)<-name.label
-            if(header)names(comp.tmp)<-col.names
-            if(checkEndRec){
-              tmp<-(comp.tmp==-1)
-              tmp<-apply(tmp,1,FUN=function(xy){sum(xy,na.rm=TRUE)})
-              tmp<-(tmp!=(dim(comp.tmp)[2]-2))
-              comp.tmp<-comp.tmp[tmp,]
-            }
-              if(as.numeric.as.possible){
-                comp.tmp<-
-                  apply(comp.tmp,c(1,2),FUN=function(xz){
-              if(length(grep(x=x,pattern="[[:digit:]]"))>0){return(as.numeric(xz))}else{return(xz)}})
-                comp.tmp<-as.data.frame(compoent)
-              }
-              if(!is.null(as.numeric.col)){
-                comp.tmp[,as.numeric.col]<-apply(comp.tmp[,as.numeric.col],c(1,2),as.numeric)
-              }
-#              cat("HERE3\n");browser()
-              return(comp.tmp)
-            })
-    }
-#
-#
-#
-
-#    })
-#    if(0){
-    component<-mapply(FUN=function(x,y,z){
-                        comp.tmp<-x[(y+1):z]
-                        cat("HERE\n");browser()
-                        if(header||is.null(col.names))col.names<-name.label<-unlist(strsplit(comp.tmp[skip.col.names+1],split="[[:blank:]]+"))
-                        comp.tmp<-read.table.texts(texts=comp.tmp,skip=skip+1,header=FALSE)
-
-                        #if(header)names(comp.tmp)<-name.label
-                        if(header)names(comp.tmp)<-col.names
-                        if(checkEndRec){
-                          tmp<-(comp.tmp==-1)
-                          tmp<-apply(tmp,1,FUN=function(x){sum(x,na.rm=TRUE)})
-                          tmp<-(tmp!=(dim(comp.tmp)[2]-2))
-                          comp.tmp<-comp.tmp[tmp,]
-                        }
-                          if(as.numeric.as.possible){
+          #if(header)names(comp.tmp)<-name.label
+          if(header)names(comp.tmp)<-col.names
+          if(checkEndRec){
+            tmp<-(comp.tmp==-1)
+            tmp<-apply(tmp,1,FUN=function(x){sum(x,na.rm=TRUE)})
+            tmp<-(tmp!=(dim(comp.tmp)[2]-2))
+            comp.tmp<-comp.tmp[tmp,]
+          }
+            if(as.numeric.as.possible){
 #                              cat("HERE90 in readDat.r\n")
 #                              browser()
-                            comp.tmp<-
-                              apply(comp.tmp,c(1,2),FUN=function(x){
-                          if(length(grep(x=x,pattern="[[:digit:]]"))>0){return(as.numeric(x))}else{return(x)}})
-                            comp.tmp<-as.data.frame(compoent)
-                          }
-                          if(!is.null(as.numeric.col)){
-                            comp.tmp[,as.numeric.col]<-apply(comp.tmp[,as.numeric.col],c(1,2),as.numeric)
-                          }
-                          cat("HERE3\n");browser()
-                          return(comp.tmp)
-                        },lapply(report[[1]],"[[",1),headerL[[1]],EL,SIMPLIFY=FALSE)
+              comp.tmp<-
+                apply(comp.tmp,c(1,2),FUN=function(x){
+            if(length(grep(x=x,pattern="[[:digit:]]"))>0){return(as.numeric(x))}else{return(x)}})
+              comp.tmp<-as.data.frame(compoent)
+            }
+            if(!is.null(as.numeric.col)){
+              comp.tmp[,as.numeric.col]<-apply(comp.tmp[,as.numeric.col],c(1,2),as.numeric)
+            }
+            cat("HERE3\n");browser()
+            return(comp.tmp)
+          }
+
+    component<-mapply(FUN=,lapply(report[[1]],"[[",1),headerL[[1]],EL,SIMPLIFY=FALSE)
 #    }
-    cat("HERE4\n");browser()
+    cat("HERE67 in readDat\n");browser()
     return(component)
   }
 
@@ -171,7 +129,7 @@ readDat.trad<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
           col.names<-paste("V",1:ncol,sep="")
         }
       }
-     cat("HERE164 in readDat.r\n") 
+     cat("HERE174 in readDat.r\n")
 
 
   # con.component<-textConnection(component)
@@ -193,10 +151,10 @@ readDat.trad<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
         component<-component[tmp,]
       }
       if(as.numeric.as.possible){
-        cat("HERE184 in readDat.r")
+        cat("HERE196 in readDat.r\n")
         print(str(component))
         cat("\n")
-        pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)([eE][-+]?[0-9]+)?$" ## 
+        pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)([eE][-+]?[0-9]+)?$" ##
         # pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)?$"
         # pattern="^[-+]?[0-9]+$"
         print(sapply(component,FUN=function(y){length(grep(x=y,pattern=pattern))}))
@@ -206,7 +164,7 @@ readDat.trad<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
 
 #            if(sum(grep(x=x,pattern=pattern))>0){return(as.numeric(x))}else{return(x)}})
         cat("HERE197")
-#        browser()      
+#        browser()
         component<-lapply(component,FUN=function(y){if(length(grep(x=y,pattern))==length(y)){as.numeric(y)}else{y}})
 
         component<-as.data.frame(component)
