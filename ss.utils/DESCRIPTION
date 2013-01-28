@@ -1,0 +1,53 @@
+Package: ss.utils
+Type: Package
+Title: set of small functions useful with SS
+Version: 0.9981
+Date: 2013-1-26
+Author: person("Takeuchi", "Yukio",email="yukiot at fra.affrc.go.jp")
+Maintainer: Yukio Takeuchi <yukiot@fra.affrc.go.jp>
+Depends:plyr
+Description: set of small function to be used with SS
+						For example, biological reference points, such as Fmsy, F0.1, F%SPR etc can
+						be calculated
+						2011/03/28 export(getReport and calcFAA)
+						2011/04/02 updated plotComps.lattice
+						2011/04/12 many updates including plotComps.lattice summarySS makeCPUEfit
+						2011/04/14 Adapted multiple season recruitments
+						2011/04/16 Add Pearson residual plots of length/Age comps by year
+						2011/04/16 Corrected an coding error when calling makeCPUEfit from summarySS. 
+						           Previously makeCPUEfit always read a file "report.sso" in current working directry
+						2011/04/17 Level plot of Pearson residuals was corrected to plot missing cell as blank 
+						2011/04/18 Corrected several errors in do.boot
+						2011/04/19 Further corrected code of do.boot
+						2011/04/21 Minor updates
+						2011/04/27 To make compatible with 3.21a etc
+						2011/05/02 core part of calcFAA was rewritten
+						2011/05/04 getFAA.y allow to output annual F by fleet
+						2011/05/24 Many changes since then (0.95)
+						2011/05/24 fixed a bug in calFAA.ypr (0.96)
+						2011/06/02 To chnage to load doSMP, foreach later(0.97)
+						2011/06/05 Update to make compatible with SS 3.21d (0.971)
+						2011/06/05 To put dimnames in faa.array in calcFAA etc (0.972)
+						2011/06/07 Add new option nyears.Floss to calcBRP 
+						2011/06/08 Export getFmort.ypr, getFmort.ypr0
+						2011/06/09 calcFAA.ypr was exporesed
+						2011/06/09 Corrected a coding error
+						2011/07/11 Compiled with 2.13.1 and made compatible with SS3.21d
+						2011/11/04 Compiled with 2.14.0
+						2011/11/04 Export checkSSversion
+						2011/11/20 compiled with 2.14.0 with command R CMD INSTALL --build -l .\\temp ss.utils
+						2011/11/22 modified calcSPR 
+						2011/11/23 Update besic functions to read SS outputs(report.sso)
+						2012/03/02 Recompiled with 2.14.2 
+						2012/03/07 Recovered NAMESPACE
+						2012/04/06 Fixed YPR calculation, Recompiled with 2.15.0
+						2012/04/07 Fixed SPR calculation and MSY estimation
+						2012/04/07 Fixed calculation of MSY and associated biomass size ,ver 0.992
+						2012/04/23 rewrite readDat, ver 0.993
+						2012/11/08 Compiled with 2.15.2 for ISC/12/PBFWG-3 WS 
+						2012/11/21 version 0.995 Corrected misspeling of "family" 
+						2012/11/21 version 0.996 change default argument of getComponent
+						2012/12/02 version 0,998 updated rtools to 2.16 from 2.15
+            2013/01/26 version 0.9981 Started to use Rstudio and git
+License: BSD
+LazyLoad: yes
