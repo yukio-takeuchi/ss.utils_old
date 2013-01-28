@@ -1,6 +1,6 @@
 ##########################################################################
 ##
-##  SSの出力を項目毎に読み込むための函数
+##  SSの出力を項目毎に読み込むための函数群
 ##
 ##  2011/11/26 同様の機能を持つreadDatとgetComponentをまとめた
 ##
@@ -9,17 +9,8 @@
 ##  2013/01/27
 ##
 
-readDat<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FALSE,footer.char=NULL,col.names=NULL,
+readDat.0<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FALSE,footer.char=NULL,col.names=NULL,
                         skip.col.names=0,checkEndRec=FALSE,colClasses=NULL,as.numeric.as.possible=FALSE,as.numeric.col=NULL){
-  if(is.null(report))stop("report is missing in readDat")
-
-  headerL<-getHeaderL(header.char=header.char,report=report)
-  if(is.oldStyle(report)){
-    res<-readDat.trad(header.char=header.char,report=report,blankLines=blankLines,skip=skip,header=header,footer.char=footer.char,
-    col.names=col.names,skip.col.names=skip.col.names,checkEndRec=checkEndRec,colClasses=colClasses,as.numeric.as.possible=as.numeric.as.possible,
-    as.numeric.col=as.numeric.col,headerL=headerL)
-    return(res)
-  }else{
     if(is.null(footer.char)){
       EL<-mapply(FUN=function(x,y){
         res<-componentEndL(x,y$blankLines)
@@ -63,6 +54,25 @@ readDat<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FALSE,fo
     component<-mapply(FUN=,lapply(report[[1]],"[[",1),headerL[[1]],EL,SIMPLIFY=FALSE)
 #    }
     cat("HERE67 in readDat\n");browser()
+    return(component)
+}
+
+readDat<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FALSE,footer.char=NULL,col.names=NULL,
+                        skip.col.names=0,checkEndRec=FALSE,colClasses=NULL,as.numeric.as.possible=FALSE,as.numeric.col=NULL){
+  if(is.null(report))stop("report is missing in readDat")
+
+  headerL<-getHeaderL(header.char=header.char,report=report)
+  if(is.oldStyle(report)){
+    res<-readDat.trad(header.char=header.char,report=report,blankLines=blankLines,skip=skip,header=header,footer.char=footer.char,
+    col.names=col.names,skip.col.names=skip.col.names,checkEndRec=checkEndRec,colClasses=colClasses,as.numeric.as.possible=as.numeric.as.possible,
+    as.numeric.col=as.numeric.col,headerL=headerL)
+    return(res)
+  }else{
+    component<-readDat.0(header.char=header.char,report=report,blankLines=blankLines,skip=skip,
+                          header=header,footer.char=footer.char,col.names=col.names,
+                          skip.col.names=skip.col.names,checkEndRec=checkEndRec,colClasses=colClasses,
+                          as.numeric.as.possible=as.numeric.as.possible,
+                          as.numeric.col=as.numeric.col)
     return(component)
   }
 
