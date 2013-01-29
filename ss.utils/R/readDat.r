@@ -10,7 +10,8 @@
 ##
 
 readDat.0<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FALSE,footer.char=NULL,col.names=NULL,
-                        skip.col.names=0,checkEndRec=FALSE,colClasses=NULL,as.numeric.as.possible=FALSE,as.numeric.col=NULL){
+                        skip.col.names=0,checkEndRec=FALSE,colClasses=NULL,as.numeric.as.possible=FALSE,as.numeric.col=NULL,
+                    headerL=NULL){
     if(is.null(footer.char)){
       EL<-mapply(FUN=function(x,y){
         res<-componentEndL(x,y$blankLines)
@@ -72,7 +73,7 @@ readDat<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FALSE,fo
                           header=header,footer.char=footer.char,col.names=col.names,
                           skip.col.names=skip.col.names,checkEndRec=checkEndRec,colClasses=colClasses,
                           as.numeric.as.possible=as.numeric.as.possible,
-                          as.numeric.col=as.numeric.col)
+                          as.numeric.col=as.numeric.col,headeL=headerL)
     return(component)
   }
 
@@ -105,31 +106,18 @@ readDat.trad<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
       #blankLines<-grep(value=FALSE,pattern="^$",x=report)
       blankLines<-getBlankLines(report)
     }
-    cat("HERE140 in readDat.r\n")
-    print(is.report.trad(report))
     if(is.report.trad(report)){
-      cat("143footer.char\n")
-      print(is.null(footer.char))
       if(is.null(footer.char)){
         EL<-componentEndL(headerL=headerL,blankLines=blankLines)
       }else{
         EL<-headerL+grep(x=report[headerL:length(report)],value=FALSE,pattern=footer.char)[1]-2
-        cat("headerL=")
-        print(headerL)
-        cat("\nHERE149\nEL=")
-        print(EL)
-        cat("\nreport[EL]=")
-        print(report[EL])
-    #    browser()
       }
-#  browser()
       component<-report[(headerL+1):EL]
       if(header){
         col.names<-name.label<-unlist(strsplit(component[skip.col.names+1],split="[[:blank:]]+"))
       }
       if(is.null(col.names)){
         if(skip.col.names>=0){
-#          browser()
           col.names<-paste(unlist(strsplit(component[1+skip.col.names],split="[[:blank:]]+")))
         }else{ ###
           ncol<-max(sapply(report[(headerL+1):EL],FUN=function(line){
@@ -139,20 +127,10 @@ readDat.trad<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
           col.names<-paste("V",1:ncol,sep="")
         }
       }
-     cat("HERE174 in readDat.r\n")
-
-
-  # con.component<-textConnection(component)
-# component<-read.table(con.component,fill=TRUE,as.is=TRUE,header=FALSE,skip=1)
-# close(con.component)
       component<-read.table.texts(texts=component,skip=skip+1,header=FALSE,colClasses=colClasses,col.names=col.names)
       if(header){
-#        names(component)<-name.label
         names(component)<-col.names
       }
-
-
-   #   if(as.numeric.as.possible)browser()
       ### it is not certain this block is working or not
       if(checkEndRec){
         tmp<-(component==-1)
@@ -167,19 +145,10 @@ readDat.trad<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
         pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)([eE][-+]?[0-9]+)?$" ##
         # pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)?$"
         # pattern="^[-+]?[0-9]+$"
-        print(sapply(component,FUN=function(y){length(grep(x=y,pattern=pattern))}))
-        cat("\n")
-#        component<-
-#          apply(component,c(1,2),FUN=function(x){
-
-#            if(sum(grep(x=x,pattern=pattern))>0){return(as.numeric(x))}else{return(x)}})
-        cat("HERE197")
-#        browser()
+#        print(sapply(component,FUN=function(y){length(grep(x=y,pattern=pattern))}))
         component<-lapply(component,FUN=function(y){if(length(grep(x=y,pattern))==length(y)){as.numeric(y)}else{y}})
-
         component<-as.data.frame(component)
         print(str(component))
- #  browser()
       }
       if(!is.null(as.numeric.col)){
         component[,as.numeric.col]<-apply(component[,as.numeric.col],c(1,2),as.numeric)

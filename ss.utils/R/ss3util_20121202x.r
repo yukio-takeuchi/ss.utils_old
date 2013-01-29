@@ -45,7 +45,7 @@ is.report.trad<-function(report){
   }else if(class(report)=="report.list.trad"){
     return(FALSE)
   }else{
-    stop("report is something wrong in is .report.trad")
+    stop("report is something wrong in is.report.trad")
   }
 }
 
