@@ -113,45 +113,50 @@ readDat.trad<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
         EL<-headerL+grep(x=report[headerL:length(report)],value=FALSE,pattern=footer.char)[1]-2
       }
       component<-report[(headerL+1):EL]
-      if(header){
-        col.names<-name.label<-unlist(strsplit(component[skip.col.names+1],split="[[:blank:]]+"))
-      }
-      if(is.null(col.names)){
-        if(skip.col.names>=0){
-          col.names<-paste(unlist(strsplit(component[1+skip.col.names],split="[[:blank:]]+")))
-        }else{ ###
-          ncol<-max(sapply(report[(headerL+1):EL],FUN=function(line){
-                                                    length(strsplit(line,split="[[:blank:]]+")[[1]])
-                                                    },
-                simplify=TRUE))
-          col.names<-paste("V",1:ncol,sep="")
+      if(headerL+1<EL){
+        if(header){
+          col.names<-name.label<-unlist(strsplit(component[skip.col.names+1],split="[[:blank:]]+"))
         }
-      }
-      component<-read.table.texts(texts=component,skip=skip+1,header=FALSE,colClasses=colClasses,col.names=col.names)
-      if(header){
-        names(component)<-col.names
-      }
-      ### it is not certain this block is working or not
-      if(checkEndRec){
-        tmp<-(component==-1)
-        tmp<-apply(tmp,1,FUN=function(x){sum(x,na.rm=TRUE)})
-        tmp<-(tmp!=(dim(component)[2]-2))
-        component<-component[tmp,]
-      }
-      if(as.numeric.as.possible){
-        cat("HERE196 in readDat.r\n")
-        print(str(component))
-        cat("\n")
-        pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)([eE][-+]?[0-9]+)?$" ##
-        # pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)?$"
-        # pattern="^[-+]?[0-9]+$"
-#        print(sapply(component,FUN=function(y){length(grep(x=y,pattern=pattern))}))
-        component<-lapply(component,FUN=function(y){if(length(grep(x=y,pattern))==length(y)){as.numeric(y)}else{y}})
-        component<-as.data.frame(component)
-        print(str(component))
-      }
-      if(!is.null(as.numeric.col)){
-        component[,as.numeric.col]<-apply(component[,as.numeric.col],c(1,2),as.numeric)
+        if(is.null(col.names)){
+          if(skip.col.names>=0){
+            col.names<-paste(unlist(strsplit(component[1+skip.col.names],split="[[:blank:]]+")))
+          }else{ ###
+            ncol<-max(sapply(report[(headerL+1):EL],FUN=function(line){
+                                                      length(strsplit(line,split="[[:blank:]]+")[[1]])
+                                                      },
+                  simplify=TRUE))
+            col.names<-paste("V",1:ncol,sep="")
+          }
+        }
+        component<-read.table.texts(texts=component,skip=skip+1,header=FALSE,colClasses=colClasses,col.names=col.names)
+        if(is.vector(component)){cat("HERE131 in readDat.r\n");browser()}
+        if(nrow(component)==1){cat("HERE132 in readDat.r\n");browser()}
+        if(ncol(component)==1){cat("HERE133 in readDat.r\n");browser()}
+        if(header){
+          names(component)<-col.names
+        }
+        ### it is not certain this block is working or not
+        if(checkEndRec){
+          tmp<-(component==-1)
+          tmp<-apply(tmp,1,FUN=function(x){sum(x,na.rm=TRUE)})
+          tmp<-(tmp!=(dim(component)[2]-2))
+          component<-component[tmp,]
+        }
+        if(as.numeric.as.possible){
+          cat("HERE142 in readDat.r\n")
+          print(str(component))
+          cat("\n")
+          pattern<-"^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)([eE][-+]?[0-9]+)?$|^NA$" ##
+          # pattern="^[-+]?([0-9]+(.[0-9]*)?|.[0-9]+)?$"
+          # pattern="^[-+]?[0-9]+$"
+  #        print(sapply(component,FUN=function(y){length(grep(x=y,pattern=pattern))}))
+          component<-lapply(component,FUN=function(y){if(length(grep(x=y,pattern))==length(y)){as.numeric(y)}else{y}})
+          component<-as.data.frame(component)
+          print(str(component))
+        }
+        if(!is.null(as.numeric.col)){
+          component[,as.numeric.col]<-apply(component[,as.numeric.col],c(1,2),as.numeric)
+        }
       }
       return(component)
     }else{

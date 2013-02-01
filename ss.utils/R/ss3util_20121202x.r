@@ -99,6 +99,7 @@ componentEndL<-function(headerL,blankLines){
     row.length<-sapply(texts.lists,length)
     if(length(texts)==1){
       temp<-texts.lists[[1]]
+      temp<-as.data.frame(temp,stringsAsFactors =FALSE)
     }else if(!all(row.length==row.length[1])){
       cat("HERE100 length of elements is different in some line(s)\n")
     #  cat("HERE98\n")
@@ -1274,15 +1275,17 @@ getAgecomp<-getAgecomp.ss3.x <- function(report,blankLines=NULL,size.kind=c("LEN
   if(is.null(compReportFile))compReportFile<-"compReport.sso"
   composition.database <- getAgecomp.ss3.2.x(compReportFile=compReportFile)
 #  cat("finished getAgecomp.ss3.2.x\n")
-  fit.len.comps <- lapply(size.kind,FUN=function(x){
-    getAgecomp.ss3.1.x(report=report,blankLines=blankLines,size.kind=x)
-  })
+  cat("HERE1278\nsizeKind=")
+  print(size.kind)
+  cat("\n")
+  fit.len.comps <-getAgecomp.ss3.1.x(report=report,blankLines=blankLines,size.kind=size.kind)
 #  cat("finished getAgecomp.ss3.1.x\n")
 # browser()
   composition.database[[1]]$FYS<-
     paste(ifelse(composition.database[[1]]$Fleet<10,paste(0,composition.database[[1]]$Fleet,sep=""),
       composition.database[[1]]$Fleet),floor(composition.database[[1]]$Yr),composition.database[[1]]$Seas,sep="-")
 # browser()
+#  if(length(fit.len.comps)==1){cat("HERE1287\n");browser()}
   return(list(composition.database[[1]],fit.len.comps[[1]],
        c(composition.database[[2]],fit.len.comps[[2]]),size.kind=size.kind))
 }
@@ -1291,17 +1294,19 @@ plotEffNts<-function(report,fleets=NULL,size.kind=c("LEN","AGE","SIZE")){
   lapply(size.kind,FUN=function(x){
       ac1<-getAgecomp.ss3.1.x(report=report,size.kind=x)
 #  browser()
-      if(is.null(fleets)){
-        fleets<-unique(ac1[[1]]$fleet)
-        ac<-ac1[[1]]
-      }else{
-        ac<-ac1[[1]][ac1[[1]] %in% fleets]
+      if(ax1[[2]]>1){ # To check if no data
+        if(is.null(fleets)){
+          fleets<-unique(ac1[[1]]$fleet)
+          ac<-ac1[[1]]
+        }else{
+          ac<-ac1[[1]][ac1[[1]] %in% fleets]
+        }
+        ac$fleetC<-paste("FL",ifelse(ac$fleet<10,paste(0,ac$fleet,sep=""),
+          ac$fleet),sep="")
+        ac<-ac[ac$Nsamp>0,]
+        xy1<-xyplot(data=ac,Nsamp+effN~Year|fleetC,type="l",as.table=TRUE)
+        print(xy1)
       }
-      ac$fleetC<-paste("FL",ifelse(ac$fleet<10,paste(0,ac$fleet,sep=""),
-        ac$fleet),sep="")
-      ac<-ac[ac$Nsamp>0,]
-      xy1<-xyplot(data=ac,Nsamp+effN~Year|fleetC,type="l",as.table=TRUE)
-      print(xy1)
     }
   )
 }
@@ -1310,6 +1315,9 @@ plotEffNts<-function(report,fleets=NULL,size.kind=c("LEN","AGE","SIZE")){
 getAgecomp.ss3.1.x <- function(report,blankLines=NULL,size.kind=c("LEN","AGE","SIZE")){
 
 #  desc <- ifelse(len==TRUE,"^FIT_LEN_COMPS","^FIT_AGE_COMPS")
+  cat("HERE1315\nsize.kind=")
+  print(size.kind)
+  cat("\n")
   desc1<-if("LEN" %in% size.kind){"^FIT_LEN_COMPS"}
   desc2<-if("AGE" %in% size.kind){"^FIT_AGE_COMPS"}
   desc3<-if("SIZE" %in% size.kind){"^FIT_SIZE_COMPS"}
@@ -1323,23 +1331,38 @@ getAgecomp.ss3.1.x <- function(report,blankLines=NULL,size.kind=c("LEN","AGE","S
   if(is.null(blankLines)){
     blankLines<-grep(value=FALSE,pattern="^$",x=report)
   }
-# comps<-readDat(report=report,header.char=desc,blankLines=blankLines)
-  comps<-readDat(report=report,header.char=desc,blankLines=blankLines,as.numeric.as.possible=TRUE)
-  res<-list(comps=comps,nrows=length(comps))
+
+  desc<-sapply(desc,FUN=function(y){if(!identical(report[grep(value=FALSE,pattern=y,x=report)[2]+2],"^$")){return(y)}else{return(NULL)}})
+  cat("HERE1332\n")
+  print(desc);cat("\n")
+#  browser()
 
 
-  if(size.kind=="LEN"){
-    colnames(res[[1]]) <- c("Fleet","Year","Seas","Gender","Mkt","Nsamp","effN","Like")
+  tmp.fn<-function(x){
+    comps<-readDat(report=report,header.char=x,blankLines=blankLines,as.numeric.as.possible=TRUE)
+    res<-list(comps=comps,nrows=length(comps))
+#    cat("HERE1328 length(comps)=")
+    print(length(comps))
+    cat("\n")
+  #  if(length(comps)==1){cat("HERE1346\n");browser()}
+  #  if(is.vector(comps)){cat("HERE1347\n");browser()}
+    if(length(comps)>1){
+      if(size.kind=="LEN"){
+        colnames(res[[1]]) <- c("Fleet","Year","Seas","Gender","Mkt","Nsamp","effN","Like")
+      }
+      else if(size.kind=="AGE"){
+        colnames(res[[1]]) <-
+          c("Fleet","Year","Seas","Gender","Mkt","Ageerr","Lbin_lo","Lbin_hi","Nsamp","effN","Like")
+      }
+      else if(size.kind=="SIZE"){
+        colnames(res[[1]]) <-
+          c("Fleet", "Yr", "Seas", "Method", "Gender", "Mkt", "Nsamp", "effN", "Like")
+      }
+    }
+    return(res)
   }
-  else if(size.kind=="AGE"){
-    colnames(res[[1]]) <-
-      c("Fleet","Year","Seas","Gender","Mkt","Ageerr","Lbin_lo","Lbin_hi","Nsamp","effN","Like")
-  }
-  else if(size.kind=="SIZE"){
-    colnames(res[[1]]) <-
-      c("Fleet", "Yr", "Seas", "Method", "Gender", "Mkt", "Nsamp", "effN", "Like")
-  }
-  return(res)
+
+  res<-unlist(lapply(desc,tmp.fn),recursive=FALSE)
 }
 
 
@@ -1372,7 +1395,8 @@ getAgecomp.2<-getAgecomp.ss3.2.x<-getAgecomp.ss3.2.x.20090618 <- function(compRe
 #  browser()
   footer.char<-"[[:blank:]]end[[:blank:]]"
 #  footer<-"End_comp_data"
-  comps<-readDat(report=report,header.char=header.char,footer.char=footer.char,blankLines=blankLines,colClasses=type.tmp,col.names=name.tmp,checkEndRec=TRUE)
+  comps<-readDat(report=report,header.char=header.char,footer.char=footer.char,blankLines=blankLines,colClasses=type.tmp,col.names=name.tmp,
+    checkEndRec=TRUE,as.numeric.as.possible=TRUE)
   comps<-comps[comps$Kind %in% c("AGE","LEN","SIZE"),]  ## 2012/04/15 added "SIZE"
 
   nline<-length(comps)
@@ -1722,12 +1746,12 @@ set.mypar <- function(){
     cat("type=",type,"\n")
     dev.used<-NULL
     if(debug)browser()
-    if(type=="pdf"){
+    if(type=="pdf"||type=="PDF"){
       if(!Cairo){
-        pdf(file=paste(filename,".pdf",sep=""),paper="a4",height=11,width=9,family=ifelse(japanese,"Japan1",family))
+        pdf(file=paste(filename,".pdf",sep=""),paper="a4",height=11,width=9,family=ifelse(japanese,"Japan1GothicBBB",family))
 
       }else{
-        CairoPDF(file=paste(filename,".pdf",sep=""),paper="a4",height=11,width=9,family=ifelse(japanese,"Japan1",family))
+        CairoPDF(file=paste(filename,".pdf",sep=""),paper="a4",height=11,width=9,family=ifelse(japanese,"Japan1GothicBBB",family))
       }
     }else if(type=="windows"){
       if(!Cairo){
@@ -1814,7 +1838,7 @@ set.mypar <- function(){
 #######################################################################################
 
 plotComps.lattice<-function(repfile="Report.sso",report=NULL,filename=NULL,type=NULL,layout=c(2,6),fit=TRUE,aggregated=TRUE,
-  fleets=NULL,blankLines=NULL,Season=FALSE,Prop=FALSE,xlim,age=FALSE,summaryObs=FALSE,ggplotlike=FALSE,plot.new=TRUE,Cairo=FALSE,
+  fleets=NULL,blankLines=NULL,Season=FALSE,Prop=FALSE,xlim=NULL,size.kind=c("LEN","AGE","SIZE"),summaryObs=FALSE,ggplotlike=FALSE,plot.new=TRUE,Cairo=FALSE,
   compReportFile="compReport.sso"){
 
   if(is.null(report)){report<-getReport(repfile=repfile,interactive=TRUE)}
@@ -1833,112 +1857,125 @@ plotComps.lattice<-function(repfile="Report.sso",report=NULL,filename=NULL,type=
   }
   a2<-getAgecomp.ss3.x(report=report,blankLines=blankLines,compReportFile=compReportFile)
   # age=Tなら年齢組成のみ取り出す
-  a2[[1]]<-a2[[1]][a2[[1]]$Kind==ifelse(age,"AGE","LEN"),]
-  # a2[[1]]$FYS<-paste(ifelse(a2[[1]]$fleet<10,paste(0,a2[[1]]$fleet,sep=""),a2[[1]]$fleet),floor(a2[[1]]$year),a2[[1]]$season,sep="-")
-  if(!is.null(fleets)){
-    tmp<-a2[[1]][a2[[1]]$Fleet %in% fleets,]
-  }else{
-    tmp<-a2[[1]]
-  }
-  if(fit){
-    tmp1<-subset(tmp,!is.na(Bin))
-#    browser()
-    if(missing(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
-#    browser()
-    xx<-xyplot(data=tmp1,Obs*N+Exp*N~Bin|FYS,layout=layout,drop.unused.level=TRUE,
-      scales=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/5)),
-      auto.key=list(points=FALSE,lines=TRUE,columns=2),type=c("l","h"),lty=c(1,2),xlab="Length",ylab="pred vs obs",as.table=TRUE,xlim=xlim)
-      print(xx)
-  }
-
-  if(Season){
-    tmp1<-subset(tmp,!is.na(Bin))
-    if(missing(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
- #   browser()
-    if(!Prop){
-      t5<-aggregate(tmp1$Exp*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
-    }else{
-      t5<-aggregate(tmp1$Exp,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),mean )
+  tmp.fn<-function(size.kind){
+    cat("HERE1861\nsize.kind=")
+    print(size.kind)
+    cat("\n")
+    a2[[1]]<-a2[[1]][a2[[1]]$Kind==size.kind,]
+#    cat("HERE1865\n");browser()
+    if(nrow(a2[[1]])>0){
+      # a2[[1]]$FYS<-paste(ifelse(a2[[1]]$fleet<10,paste(0,a2[[1]]$fleet,sep=""),a2[[1]]$fleet),floor(a2[[1]]$year),a2[[1]]$season,sep="-")
+      if(!is.null(fleets)){
+        tmp<-a2[[1]][a2[[1]]$Fleet %in% fleets,]
+      }else{
+        tmp<-a2[[1]]
       }
-#    browser()
-    names(t5)<-c("Bin","Fleet","Seas","Exp")
-    if(!Prop){
-      t6<-aggregate(tmp1$Obs*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
-    }else{
-      t6<-aggregate(tmp1$Obs,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),mean )
-    }
-    names(t6)<-c("Bin","Fleet","Seas","Obs")
-    t5<-t5[-c(1,2,3)]
-    t7<-cbind(t6,t5)
-    t7$FS<-paste(ifelse(t7$Fleet<10,paste(0,t7$Fleet,sep=""),t7$Fleet),t7$Seas,sep="-")
-   # browser()
-    xy<-xyplot(data=t7,Exp+Obs~as.numeric(Bin)|FS,auto.key=list(points=FALSE,lines=TRUE,columns=2),
-      lty=c(1,2),type=c("l","g"),scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),columns=2,
-      as.table=TRUE,layout=layout,xlab="Length",ylab="pred vs obs",xlim=xlim)
-    print(xy)
-  }
+      if(fit){
+        cat("fit\n")
+        tmp1<-subset(tmp,!is.na(Bin))
+    #    browser()
+        if(is.null(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
+    #    browser()
+        xx<-xyplot(data=tmp1,Obs*N+Exp*N~Bin|FYS,layout=layout,drop.unused.level=TRUE,
+          scales=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/5)),
+          auto.key=list(points=FALSE,lines=TRUE,columns=2),type=c("l","h"),lty=c(1,2),xlab="Length",ylab="pred vs obs",as.table=TRUE,xlim=xlim)
+          print(xx)
+      }
 
-  if(aggregated){
-    tmp1<-subset(tmp,!is.na(Bin))
-    if(missing(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
-    if(!Prop){
-      t5<-aggregate(tmp1$Exp*tmp1$N,list(tmp1$Bin,tmp1$Fleet),sum )
-    }else{
-      t5<-aggregate(tmp1$Exp,list(tmp1$Bin,tmp1$Fleet),mean )
-    }
-    names(t5)<-c("Bin","Fleet","Exp")
-    if(!Prop){
-      t6<-aggregate(tmp1$Obs*tmp1$N,list(tmp1$Bin,tmp1$Fleet),sum )
-    }else{
-      t6<-aggregate(tmp1$Obs,list(tmp1$Bin,tmp1$Fleet),mean )
-    }
-    names(t6)<-c("Bin","Fleet","Obs")
-    t5<-t5[-c(1,2)]
-    t7<-cbind(t6,t5)
+      if(Season){
+        cat("Season\n")
+        tmp1<-subset(tmp,!is.na(Bin))
+        if(is.null(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
+     #   browser()
+        if(!Prop){
+          t5<-aggregate(tmp1$Exp*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
+        }else{
+          t5<-aggregate(tmp1$Exp,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),mean )
+          }
+    #    browser()
+        names(t5)<-c("Bin","Fleet","Seas","Exp")
+        if(!Prop){
+          t6<-aggregate(tmp1$Obs*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
+        }else{
+          t6<-aggregate(tmp1$Obs,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),mean )
+        }
+        names(t6)<-c("Bin","Fleet","Seas","Obs")
+        t5<-t5[-c(1,2,3)]
+        t7<-cbind(t6,t5)
+        t7$FS<-paste(ifelse(t7$Fleet<10,paste(0,t7$Fleet,sep=""),t7$Fleet),t7$Seas,sep="-")
+       # browser()
+        xy<-xyplot(data=t7,Exp+Obs~as.numeric(Bin)|FS,auto.key=list(points=FALSE,lines=TRUE,columns=2),
+          lty=c(1,2),type=c("l","g"),scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),columns=2,
+          as.table=TRUE,layout=layout,xlab="Length",ylab="pred vs obs",xlim=xlim)
+        print(xy)
+      }
 
-    xy<-xyplot(data=t7,Exp+Obs~as.numeric(Bin)|factor(Fleet),auto.key=list(points=FALSE,lines=TRUE,columns=2),
-    lty=c(1,2),type=c("l","g"),scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),columns=2,
-    as.table=TRUE,layout=layout,xlab="Length",ylab="pred vs obs",xlim=xlim)
-    print(xy)
-  }
-  if(summaryObs){
-    tmp1<-subset(tmp,!is.na(Bin))
-    if(missing(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
-#    t5<-aggregate(tmp1$Exp*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
+      if(aggregated){
+        cat("aggregated\n")
+        tmp1<-subset(tmp,!is.na(Bin))
+        if(missing(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
+        if(!Prop){
+          t5<-aggregate(tmp1$Exp*tmp1$N,list(tmp1$Bin,tmp1$Fleet),sum )
+        }else{
+          t5<-aggregate(tmp1$Exp,list(tmp1$Bin,tmp1$Fleet),mean )
+        }
+        names(t5)<-c("Bin","Fleet","Exp")
+        if(!Prop){
+          t6<-aggregate(tmp1$Obs*tmp1$N,list(tmp1$Bin,tmp1$Fleet),sum )
+        }else{
+          t6<-aggregate(tmp1$Obs,list(tmp1$Bin,tmp1$Fleet),mean )
+        }
+        names(t6)<-c("Bin","Fleet","Obs")
+        t5<-t5[-c(1,2)]
+        t7<-cbind(t6,t5)
 
-#    browser()
-#    names(t5)<-c("Bin","Fleet","Seas","Exp")
-    if(!Prop){
-      t6<-aggregate(tmp1$Obs*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
-    }else{
-      t6<-aggregate(tmp1$Obs,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),mean )
+        xy<-xyplot(data=t7,Exp+Obs~as.numeric(Bin)|factor(Fleet),auto.key=list(points=FALSE,lines=TRUE,columns=2),
+        lty=c(1,2),type=c("l","g"),scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),columns=2,
+        as.table=TRUE,layout=layout,xlab="Length",ylab="pred vs obs",xlim=xlim)
+        print(xy)
+      }
+      if(summaryObs){
+        cat("summaryOBS\n")
+        tmp1<-subset(tmp,!is.na(Bin))
+        if(missing(xlim))xlim<-c(min(tmp1$Bin)-0.1,max(tmp1$Bin)+0.1)
+    #    t5<-aggregate(tmp1$Exp*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
+
+    #    browser()
+    #    names(t5)<-c("Bin","Fleet","Seas","Exp")
+        if(!Prop){
+          t6<-aggregate(tmp1$Obs*tmp1$N,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),sum )
+        }else{
+          t6<-aggregate(tmp1$Obs,list(tmp1$Bin,tmp1$Fleet,tmp1$Seas),mean )
+        }
+        names(t6)<-c("Bin","Fleet","Seas","Obs")
+    #    t5<-t5[-c(1,2,3)]
+        t7<-t6
+        t7$FS<-paste("FL",ifelse(t7$Fleet<10,paste(0,t7$Fleet,sep=""),t7$Fleet),sep="")
+    #   browser()
+    #   key.Seas <- list(space = "top", text = lapply(paste("S",unique(t7$Seas),sep=""),FUN=function(x){return(x)}), points = list(pch = 1:4, col = "black"))
+    #,type=c("o","g")
+        cols<-c("black","pink","purple","blue")
+        ltys<-c(1,2,3,4)
+     #   browser()
+        texts<-levels(as.factor(t7$Seas))
+        xy<-xyplot(data=t7,Obs~as.numeric(Bin)|FS,auto.key=list(points=FALSE,lines=TRUE,lty=ltys,columns=4,col=cols,text=texts,type=c("l","l","l","l")),
+          lty=ltys,lwd=1,type=c("l","l","l","l","g"),cex=2,col=cols,scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),
+          columns=2,par.settings = simpleTheme(pch = 16),
+          as.table=TRUE,layout=layout,xlab="Length",ylab="obs",xlim=xlim,groups=t7$Seas,distribute.type=TRUE)
+        print(xy)
+    #    browser()
+    #    xy<-xyplot(data=t7,Obs~as.numeric(Bin)|FS,auto.key=list(columns=2,cex=1:4,lines=TRUE),
+    #      lty=c(1,2,3,4),type=c("l","g"),scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),
+    #      columns=2,
+    #      as.table=TRUE,layout=layout,xlab="Length",ylab="obs",xlim=xlim,groups=Seas)
+    #
+    ##    browser()
+    #    print(xy)
+    #    browser()
+      }
     }
-    names(t6)<-c("Bin","Fleet","Seas","Obs")
-#    t5<-t5[-c(1,2,3)]
-    t7<-t6
-    t7$FS<-paste("FL",ifelse(t7$Fleet<10,paste(0,t7$Fleet,sep=""),t7$Fleet),sep="")
-#   browser()
-#   key.Seas <- list(space = "top", text = lapply(paste("S",unique(t7$Seas),sep=""),FUN=function(x){return(x)}), points = list(pch = 1:4, col = "black"))
-#,type=c("o","g")
-    cols<-c("black","pink","purple","blue")
-    ltys<-c(1,2,3,4)
- #   browser()
-    texts<-levels(as.factor(t7$Seas))
-    xy<-xyplot(data=t7,Obs~as.numeric(Bin)|FS,auto.key=list(points=FALSE,lines=TRUE,lty=ltys,columns=4,col=cols,text=texts,type=c("l","l","l","l")),
-      lty=ltys,lwd=1,type=c("l","l","l","l","g"),cex=2,col=cols,scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),
-      columns=2,par.settings = simpleTheme(pch = 16),
-      as.table=TRUE,layout=layout,xlab="Length",ylab="obs",xlim=xlim,groups=t7$Seas,distribute.type=TRUE)
-    print(xy)
-#    browser()
-#    xy<-xyplot(data=t7,Obs~as.numeric(Bin)|FS,auto.key=list(columns=2,cex=1:4,lines=TRUE),
-#      lty=c(1,2,3,4),type=c("l","g"),scale=list(y="free",x=list(tick.number=(xlim[2]-xlim[1])/10)),
-#      columns=2,
-#      as.table=TRUE,layout=layout,xlab="Length",ylab="obs",xlim=xlim,groups=Seas)
-#
-##    browser()
-#    print(xy)
-#    browser()
   }
+  lapply(size.kind,tmp.fn)
 }
 # xyplot(data=az,Value+ValueMinus2sigma+ValuePlus2sigma~as.numeric(Index)|Label,auto.key=list(points=TRUE,lines=TRUE,columns=2),
 #  as.table=TRUE,scales=list(y="free"),type=c("o","l","l","g"),ylab="SSB(ton)",xlab="year",distribute.type=TRUE,col="Black")
@@ -4102,7 +4139,7 @@ summarySS<-function(reportFile="Report.sso",filename=NULL,plot.new=TRUE,Cairo=FA
   cat("Age and/or length fits\n")
   if(gtype=="base"){
     plotPearson.trad(report=report,filename=NULL,type=type,scale=scale,age.fit=age,length.fit=len,size.fit=size,
-      plot.new=FALSE,japanese=FALSE,compReportFile=compReportFile,japanese=japanese)
+      plot.new=FALSE,compReportFile=compReportFile,japanese=japanese)
   }else if(gtype=="lattice"){
     plotPearson(report=report,filename=NULL,type=type,scale=scale,age.fit=age,length.fit=len,size.fit=size,
     plot.new=FALSE,compReportFile=compReportFile,fill.page=fill.page,japanese=japanese)
@@ -4157,13 +4194,12 @@ plotCI<-function (x, y = NULL, uiw, liw = uiw, ylo = NULL, yhi = NULL,
 ## heat.colors(n=100,alpha=1)
 
 plotPearson<-function(repfile="Report.sso",report=NULL,filename=NULL,type=NULL,layout=c(2,4),scale=1,
-  length.fit=TRUE,age.fit=FALSE,size.fit=FALSE,plot.new=TRUE,sqrt=TRUE,fill.page=TRUE,brewer.div=NULL,compress=NA,
+  length.fit=TRUE,age.fit=TRUE,size.fit=TRUE,plot.new=TRUE,sqrt=TRUE,fill.page=TRUE,brewer.div=NULL,compress=NA,
   adjust=1.0,kernel="gaussian",kern.window="gaussian",kernel.bw="nrd0",compReportFile="compReport.sso",family="gaussian",
   transparent=FALSE,japanese=FALSE){
   require(lattice) || stop("package lattice is required")
   require(RColorBrewer)|| stop("package RColorBrewer is required")
   require(locfit)|| stop("package locfit is required")
-
 
   if(is.null(report))report<-getReport(repfile=repfile)
 
@@ -4186,12 +4222,12 @@ plotPearson<-function(repfile="Report.sso",report=NULL,filename=NULL,type=NULL,l
     brewer.div<-colorRampPalette(brewer.div)
   }
 
-  tmp.fnc<-function(report,Kind,compReportFile){
-    a2<-getAgecomp.ss3.x(report=report,size.kind="LEN",
+  tmp.fnc<-function(report,size.kind,compReportFile){
+    a2<-getAgecomp.ss3.x(report=report,size.kind=size.kind,
         compReportFile=compReportFile)
-    a2[[1]]<-a2[[1]][a2[[1]]$Kind==Kind,]
+    a2[[1]]<-a2[[1]][a2[[1]]$Kind==size.kind,]
     if(nrow(a2[[1]])>0){
-      main<-ifelse(Kind=="LEN","Length fit","Age fit")
+      main<-if(size.kind=="LEN"){"Length fit"}else if(size.kind=="AGE"){"Age fit"}else if(size.kind=="SIZE"){"Size fit"}else{stop("HERE4216")}
       cat(paste(main,"\n"))
       fleets<-unique(subset(a2[[1]],!is.na(Bin))[,"Fleet"])
       if(fill.page){
@@ -4215,8 +4251,8 @@ plotPearson<-function(repfile="Report.sso",report=NULL,filename=NULL,type=NULL,l
       plot.data$period<-ifelse(plot.data$Yr>=mean(yr.range),"late","early")
       plot.data$cex<-scale*if(sqrt){sqrt(abs(plot.data$Pearson))}else{abs(plot.data$Pearson)}
       plot.data$col<-ifelse(plot.data$Pearson>=0,"blue","red")
-      ylab<-ifelse(Kind=="LEN","Length","Age")
-      if(japanese)ylab<-ifelse(Kind=="LEN","体長","年齢")
+      ylab<-if(size.kind=="LEN"){"Length fit"}else if(size.kind=="AGE"){"Age fit"}else if(size.kind=="SIZE"){"Size fit"}else{stop("HERE4240")}
+      if(japanese)ylab<-if(size.kind=="LEN"){"体長"}else if(size.kind=="AGE"){"年齢"}else if(size.kind=="SIZE"){"サイズ"}else{stop("HERE4216")}
       xx<-xyplot(data=plot.data,Bin~Yr|period*factor(Fleet),cex=plot.data$cex,
         layout=layout,drop.unused.level=TRUE,xlab="Year",ylab=ylab,main=paste(main,"(Blue:Obs>Pred, Red:Obs<Pred)"),col=plot.data$col,
         as.table=TRUE,type=c("p","g"),scale=list(x="free"))
@@ -4288,15 +4324,15 @@ plotPearson<-function(repfile="Report.sso",report=NULL,filename=NULL,type=NULL,l
     }
   }
   if(age.fit){
-    tmp.fnc(report=report,Kind="AGE",compReportFile=compReportFile)
+    tmp.fnc(report=report,size.kind="AGE",compReportFile=compReportFile)
   }
 
   if(length.fit){
-    tmp.fnc(report=report,Kind="LEN",compReportFile=compReportFile)
+    tmp.fnc(report=report,size.kind="LEN",compReportFile=compReportFile)
   }
 
   if(size.fit){
-    tmp.fnc(report=report,Kind="SIZE",compReportFile=compReportFile)
+    tmp.fnc(report=report,size.kind="SIZE",compReportFile=compReportFile)
   }
 
 }
