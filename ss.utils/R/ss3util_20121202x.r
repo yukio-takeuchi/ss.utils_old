@@ -110,9 +110,9 @@ componentEndL<-function(headerL,blankLines){
       names(temp)<-paste("V",1:row.length[1],sep="")
       if(header)names(temp)<-paste(unlist(strsplit(texts.lists[[(header)+skip]],split="[[:blank:]]+")))
       if(!is.null(col.names) && length(col.names)>=row.length[1])names(temp)<-col.names[1:row.length[1]]
-      cat("HERE102\n")
-      print(names(temp))
-      cat("\n")
+ #     cat("HERE102\n")
+ #     print(names(temp))
+#      cat("\n")
     }
     return(temp)
   }
@@ -545,7 +545,7 @@ calcGenders<-function(report){
 getMorphIndexing<-function(report){
   ss.version<-checkSSversion(report=report,verbose=TRUE)
 #  browser()
-  if(as.numeric(substring(ss.version,1,2))<20 || as.numeric(substring(ss.version,1,2))>22){
+  if(as.numeric(substring(ss.version,1,2))<20 || as.numeric(substring(ss.version,1,2))==23 ){
     return(getComponent(header.char="^MORPH_INDEXING",report=report,header=TRUE))
   }else{
     return(getComponent(header.char="^MORPH_INDEXING",report=report,header=TRUE,footer.char="^#$"))
