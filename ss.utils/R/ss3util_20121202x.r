@@ -2244,6 +2244,11 @@ getNMA<-getNMA.ss3.x<-function(report=NULL,repfile="Report.sso",blankLines=NULL,
     }
 
   nma<-getComponent(header.char="^Biology_at_age",report=report,blankLines=blankLines,header=TRUE,as.numeric.as.possible=TRUE)
+  if(is.null(nma$"Mat*Fecund"))nma$"Mat*Fecund"<-nma$"Mat.Fecund"
+# To adapt new pattern in names
+  nma[gsub(pattern="._",x=names(nma)[grep(x=names(nma),pattern="._",fixed=TRUE)],fixed=T,replacement=":_")]<-nma[names(nma)[grep(x=names(nma),pattern="._",fixed=TRUE)]]
+#  nums<-grep(x=names(nma),pattern="._",fixed=T)
+#  cat("HERE2248");browser()
   return(list(nma=nma,nrow=nrow(nma)))
 }
 

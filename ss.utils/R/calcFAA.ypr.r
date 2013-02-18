@@ -1,5 +1,5 @@
-# YPR‚ÌŒvZ‚É•Ö—˜‚È‚æ‚¤‚É‹Gß‚ğ“WŠJ‚µA”N—î‚ğ(nage+1)‚Ì3”{‚Ü‚Å‚Ì‚Î‚µ‚½
-# F,partialF,Z,M,¬n—¦xY—‘—Ê,‹™–@•Êl”¼Šú”N—î‚ ‚½‚è•½‹Ï‹™Šl‘Ìd‚Ìs—ñ‚ğ‹‚ß‚éB
+# YPRã®è¨ˆç®—ã«ä¾¿åˆ©ãªã‚ˆã†ã«å­£ç¯€ã‚’å±•é–‹ã—ã€å¹´é½¢ã‚’(nage+1)ã®3å€ã¾ã§ã®ã°ã—ãŸ
+# F,partialF,Z,M,æˆç†Ÿç‡xç”£åµé‡,æ¼æ³•åˆ¥å››åŠæœŸå¹´é½¢ã‚ãŸã‚Šå¹³å‡æ¼ç²ä½“é‡ã®è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹ã€‚
 #
 # argument
 # faa          : object calculated by calFAA.ss3.x
@@ -13,8 +13,8 @@
 # geomean      : Logical value if geometric mean to be applied or not (default=TRUE)
 #
 # return value
-# ˆÈ‰º‚ğ—v‘f‚É‚Âlist
-#@fmort.matrix : 2 dimensional array (nageseason x nfleet+3+1+nfleet+1), storing F@A and partial F@A,
+# ä»¥ä¸‹ã‚’è¦ç´ ã«æŒã¤list
+# fmort.matrix : 2 dimensional array (nageseason x nfleet+3+1+nfleet+1), storing F@A and partial F@A,
 #                 Z, M, Spawning output at age, W@A by fleet and number of survivor at age conditioned as R0=1 for YPR
 # nage         : nage as defined in SS
 # nseason      : number of season
@@ -48,8 +48,8 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
   nageseason<-(nage+1)*nseason
   nageseason3<-3*nageseason
 
-  ## Šô‰½•½‹Ï‚ğŒvZ‚·‚é‚½‚ß‚É0‚Ì‘ã‚í‚è‚É1‚ğ‘ã“ü‚µ‚½
-  ## 2ŒÀ–Ú‚Ì—v‘f”‚ÍA‹™‹Æ”+1+Z+M+¬n—¦+
+  ## å¹¾ä½•å¹³å‡ã‚’è¨ˆç®—ã™ã‚‹ãŸã‚ã«0ã®ä»£ã‚ã‚Šã«1ã‚’ä»£å…¥ã—ãŸ
+  ## 2æ™‚é™ç›®ã®è¦ç´ æ•°ã¯ã€æ¼æ¥­æ•°+1+Z+M+æˆç†Ÿç‡+
   if(nmorph>1){
     fmort<-array(0,dim=c(nageseason3,nfleet+3+1+nfleet+1,nmorph),dimnames=list(seq(from=0,by=1.0/nseason,length.out=nageseason3),
       c("Total",paste("F_FL",1:nfleet,sep=""),"Z","M","Mat.Fec",paste("SelW",1:nfleet,sep=""),"N"),paste("Morph",info$Morph,sep=".")))
@@ -65,8 +65,8 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
     dimnames(faa$faa.array)<-nametemp[1:3]
   }
 #  cat(paste(ifelse(geomean,"geomean\n","arithmatic mean\n")))
-  # ‚Ü‚¸”Nl”¼Šúx”N—î‚ÌF@A‚ÌŠô‰½•½‹Ï‚ğŒvZ‚·‚é
-  # Šô‰½•½‹Ï‚Ìê‡‚ÍA—v‘f‚ª‚·‚×‚Ä1,Zp•½‹Ï‚Å‚ÍA—v‘f‚ª‚·‚×‚Ä0
+  # ã¾ãšå¹´å››åŠæœŸxå¹´é½¢ã®F@Aã®å¹¾ä½•å¹³å‡ã‚’è¨ˆç®—ã™ã‚‹
+  # å¹¾ä½•å¹³å‡ã®å ´åˆã¯ã€è¦ç´ ãŒã™ã¹ã¦1,ç®—è¡“å¹³å‡ã§ã¯ã€è¦ç´ ãŒã™ã¹ã¦0
   if(nmorph==1){
     fmort1<-array(ifelse(geomean,1,0),dim=c(nseason,nage+1))
   }else{
@@ -83,11 +83,11 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
       }
       if(length(temp1)==0){cat("length(temp1)=",length(temp1));browser()}
       if(geomean){
-      ###  Šô‰½•½‹Ï
+      ###  å¹¾ä½•å¹³å‡
         fmort1<-fmort1*temp1
       }else{
 ##################
-#    Zp•½‹Ï
+#    ç®—è¡“å¹³å‡
         fmort1<-fmort1+temp1
       }
 #      temp<-faa$faa.array[as.numeric(dimnames(faa$faa.array)[[1]])==y+(1 :nseason-1)*1.0/nseason,,]
@@ -101,8 +101,8 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
     }else{
       fmort1<-fmort1/length(year)
     }
-#### partial F@A‚É•ª‚¯‚é‚½‚ß‚ÉA‘ÎÛ‚Æ‚·‚éŠúŠÔ‚Ì•½‹Ï‚Ìpartial C@A‚ğŒvZ‚·‚é
-#### ‚±‚Ì•”•ª‚ÍZp•½‹Ï
+#### partial F@Aã«åˆ†ã‘ã‚‹ãŸã‚ã«ã€å¯¾è±¡ã¨ã™ã‚‹æœŸé–“ã®å¹³å‡ã®partial C@Aã‚’è¨ˆç®—ã™ã‚‹
+#### ã“ã®éƒ¨åˆ†ã¯ç®—è¡“å¹³å‡
     if(nmorph==1){
       caa1<-array(0,dim=c(nseason,nage+1,nfleet))
     }else{
@@ -124,7 +124,7 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
 #       dim3<-dim(faa.array)[3]
 #    #    faa.array<-(faa/(totcatch+1.e-16))%o%rep(1,dim3)*caa$caa.array
 #        faa.array<-(faa/(totcatch*(totcatch>0)))%o%rep(1,dim3)*caa$caa.array
-#        faa.array[which(caa$caa.array==0,arr.ind=TRUE)]=0     #### 2011/02/24 ‚ ‚é”Nl”¼Šú”N—î‚Å‹™Šl‚ª‘S‚­‚È‚¢‚Æ‚«‚ÉAF@A ‚ÉNA‚ªo‚Ä‚µ‚Ü‚¤‚Ì‚ÅA‚»‚±‚ğ0‚ÉC³A
+#        faa.array[which(caa$caa.array==0,arr.ind=TRUE)]=0     #### 2011/02/24 ã‚ã‚‹å¹´å››åŠæœŸå¹´é½¢ã§æ¼ç²ãŒå…¨ããªã„ã¨ãã«ã€F@A ã«NAãŒå‡ºã¦ã—ã¾ã†ã®ã§ã€ãã“ã‚’0ã«ä¿®æ­£ã€
 #    browser()
     if(nmorph==1){
       totcatch<-apply(caa1,c(1,2),sum)
@@ -185,7 +185,7 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
 #      browser()
     }
   }
-
+#  cat("HERE188\n")
   if(nmorph==1){
 # Calculate total F
     fmort[,1]<-apply(fmort,1,sum)
@@ -195,10 +195,13 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
 # Calculate Z
     fmort[1:nageseason,"Z"]<-fmort[1:nageseason,"Total"]+fmort[1:nageseason,"M"]
 # MaturityxFecundity
+#  cat("HERE198");browser()
     fmort[seq(spawnseason,nageseason,by=nseason),"Mat.Fec"]<-nma.sorted$"Mat*Fecund"[seq(spawnseason,nageseason,by=nseason)]
+#    cat("HERE200\n")
 # mean weight by fishery
 #  fmort[1:nageseason,nfleet+4+1:nfleet]<-data.matrix(nma.sorted[1:nageseason,20+(1:nfleet-1)*3])
-# Biology matrix ‚É—ñ‚ª’Ç‰Á‚É‚È‚Á‚Ä‚à—ñ–¼‚ª•Ï‚í‚ç‚È‚¯‚ê‚Î‘Î‰o—ˆ‚é‚æ‚¤‚É@2010/02/15
+# Biology matrix ã«åˆ—ãŒè¿½åŠ ã«ãªã£ã¦ã‚‚åˆ—åãŒå¤‰ã‚ã‚‰ãªã‘ã‚Œã°å¯¾å¿œå‡ºæ¥ã‚‹ã‚ˆã†ã«:2010/02/15
+#    cat("HERE204");browser()
     fmort[1:nageseason,nfleet+4+1:nfleet]<-data.matrix(nma.sorted[1:nageseason,paste("SelWt:_",1:nfleet,sep="")])
   }else{
 # Calculate total F
@@ -212,12 +215,14 @@ calcFAA.ypr<-function(faa,year,fmult=1,fmodifier=1,R0=1,spawnseason=NA,debug=FAL
     fmort[1:nageseason,"Z",]<-fmort[1:nageseason,"Total",]+fmort[1:nageseason,"M",]
 # MaturityxFecundity
     for(m in 1:dim(fmort)[3]){
+#      cat("HERE215")
       fmort[seq(spawnseason,nageseason,by=nseason),"Mat.Fec",]<-
         nma.sorted[nma.sorted$Morph==info$Morph[m],]$"Mat*Fecund"[seq(spawnseason,nageseason,by=nseason)]
+#      cat("HERE218\n")
     }
 # mean weight by fishery
 #  fmort[1:nageseason,nfleet+4+1:nfleet]<-data.matrix(nma.sorted[1:nageseason,20+(1:nfleet-1)*3])
-# Biology matrix ‚É—ñ‚ª’Ç‰Á‚É‚È‚Á‚Ä‚à—ñ–¼‚ª•Ï‚í‚ç‚È‚¯‚ê‚Î‘Î‰o—ˆ‚é‚æ‚¤‚É@2010/02/15
+# Biology matrix ã«åˆ—ãŒè¿½åŠ ã«ãªã£ã¦ã‚‚åˆ—åãŒå¤‰ã‚ã‚‰ãªã‘ã‚Œã°å¯¾å¿œå‡ºæ¥ã‚‹ã‚ˆã†ã«ã€€2010/02/15
     for(m in 1:dim(fmort)[3]){
       fmort[1:nageseason,nfleet+4+1:nfleet,m]<-
         data.matrix(nma.sorted[nma.sorted$Morph==info$Morph[m],paste("SelWt:_",1:nfleet,sep="")])
