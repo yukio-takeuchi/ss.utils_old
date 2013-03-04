@@ -1,8 +1,8 @@
 Package: ss.utils
 Type: Package
 Title: set of small functions useful with SS
-Version: 0.9982
-Date: 2013-2-18
+Version: 0.9983
+Date: 2013-3-5
 Author: person("Takeuchi", "Yukio",email="yukiot at fra.affrc.go.jp")
 Maintainer: Yukio Takeuchi <yukiot@fra.affrc.go.jp>
 Depends:plyr
@@ -50,5 +50,6 @@ Description: set of small function to be used with SS
 						2012/12/02 version 0,998 updated rtools to 2.16 from 2.15
             2013/01/26 version 0.9981 Started to use Rstudio and git
             2013/02/20 version 0.9981 fixed bug in calcFAA.ypr
+            2013/03/05 version 0.9983 Some refactoring of source codes
 License: BSD
 LazyLoad: yes
