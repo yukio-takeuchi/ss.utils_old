@@ -1,0 +1,75 @@
+sample.interval=20000
+gc system.time 
+gc system.time 
+grep getCAA system.time 
+grep readDat getCAA system.time 
+grep readDat getCAA system.time 
+cat.default cat read.table.texts readDat getCAA system.time 
+cat.default cat read.table.texts readDat getCAA system.time 
+scan read.table read.table.texts readDat getCAA system.time 
+scan read.table read.table.texts readDat getCAA system.time 
+getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+FUN apply getCAA system.time 
+apply getCAA system.time 
+apply getCAA system.time 
+lapply unlist apply getCAA system.time 
+paste FUN apply unique.matrix unique factor split.default split [<-.data.frame [<- getCAA system.time 
+apply unique.matrix unique factor split.default split [<-.data.frame [<- getCAA system.time 
+paste FUN apply unique.matrix unique factor split.default split [<-.data.frame [<- getCAA system.time 
+nchar data.frame cbind cbind getCAA system.time 
+as.character factor as.factor interaction reshapeLong reshape getCAA system.time 
+[<-.data.frame [<- reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+seq.int rbind rbind reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+list rbind rbind reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+list rbind rbind reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+inherits is.factor [<-.factor [<- rbind rbind reshapeLong reshape getCAA system.time 
+unlist rbind rbind reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+[<-.data.frame [<- reshapeLong reshape getCAA system.time 
+unclass rbind rbind reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+list rbind rbind reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+rbind rbind reshapeLong reshape getCAA system.time 
+reshapeLong reshape getCAA system.time 
+reshapeLong reshape getCAA system.time 
+colnames<- getCAA system.time 
+| na.omit.data.frame na.omit model.frame.default model.frame eval eval xtabs as.array getCAA system.time 
+[.data.frame [ na.omit.data.frame na.omit model.frame.default model.frame eval eval xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+as.character factor FUN lapply xtabs as.array getCAA system.time 
+sort.list factor split.default split is.vector lapply tapply xtabs as.array getCAA system.time 
+as.character factor split.default split is.vector lapply tapply xtabs as.array getCAA system.time 
+match factor split.default split is.vector lapply tapply xtabs as.array getCAA system.time 
+lapply tapply xtabs as.array getCAA system.time 
+lapply 

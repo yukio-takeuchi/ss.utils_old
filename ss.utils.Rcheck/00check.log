@@ -1,0 +1,756 @@
+* using log directory '/Users/yukiot/Dropbox/Rscript/Projection/ss.utils/ss.utils.Rcheck'
+* using R version 2.15.2 (2012-10-26)
+* using platform: x86_64-apple-darwin9.8.0 (64-bit)
+* using session charset: ASCII
+* checking for file 'ss.utils/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'ss.utils' version '0.9981'
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking whether package 'ss.utils' can be installed ... OK
+* checking installed package size ... NOTE
+  installed size is  5.7Mb
+  sub-directories of 1Mb or more:
+    data   5.5Mb
+* checking package directory ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... WARNING
+Subdirectory 'data' contains no data sets.
+* checking R files for non-ASCII characters ... WARNING
+Found the following files with non-ASCII characters:
+  ss3util_20121202x.r
+Portable packages must use only ASCII characters in their R code,
+except perhaps in comments.
+Use \uxxxx escapes for other characters.
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking for unstated dependencies in R code ... WARNING
+'::' or ':::' imports not declared from:
+  'gplots' 'reshape2'
+'library' or 'require' calls not declared from:
+  'Cairo' 'Hmisc' 'R.utils' 'RColorBrewer' 'abind' 'doMC' 'doSMP'
+  'foreach' 'ggplot2' 'gplots' 'lattice' 'latticeExtra' 'locfit'
+  'reshape' 'reshape2' 'rgl' 'rlecuyer' 'sendmailR' 'snowfall'
+See the information on DESCRIPTION files in the chapter 'Creating R
+packages' of the 'Writing R Extensions' manual.
+* checking S3 generic/method consistency ... WARNING
+print:
+  function(x, ...)
+print.BRPnew:
+  function(BRP, digits)
+
+See section 'Generic functions and methods' of the 'Writing R
+Extensions' manual.
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+getFmort.ypr.0: warning in calcCW.ypr(fmort = fmort): partial argument
+  match of 'fmort' to 'fmort.list'
+getFmort.ypr.0 : calc.ypr: warning in calcCW.ypr(fmort = fmort):
+  partial argument match of 'fmort' to 'fmort.list'
+getNAA: warning in aaply(.data = naa.full.array, .margin = c(6, 7, 9),
+  .fun = function(x) {: partial argument match of '.margin' to
+  '.margins'
+getNAA: warning in sum(x, na.rm = TRUE): partial argument match of
+  '.margin' to '.margins'
+getNAA: warning in }, .drop = FALSE): partial argument match of
+  '.margin' to '.margins'
+getNAA.ss3.x: warning in aaply(.data = naa.full.array, .margin = c(6,
+  7, 9), .fun = function(x) {: partial argument match of '.margin' to
+  '.margins'
+getNAA.ss3.x: warning in sum(x, na.rm = TRUE): partial argument match
+  of '.margin' to '.margins'
+getNAA.ss3.x: warning in }, .drop = FALSE): partial argument match of
+  '.margin' to '.margins'
+getReport.info: warning in grep(x = report, pattern = "^EndTime", valu
+  = TRUE): partial argument match of 'valu' to 'value'
+make.projection : project1: warning in aaply(.data = temp, .margin = 2,
+  .fun = function(x) {: partial argument match of '.margin' to
+  '.margins'
+make.projection : project1: warning in temp.next <- c(0,
+  rev(rev(x)[-1])): partial argument match of '.margin' to '.margins'
+make.projection : project1: warning in temp.next[length(temp.next)] <-
+  temp.next[length(temp.next)] + rev(x)[1]: partial argument match of
+  '.margin' to '.margins'
+make.projection : project1: warning in return(temp.next): partial
+  argument match of '.margin' to '.margins'
+make.projection : project1: warning in }): partial argument match of
+  '.margin' to '.margins'
+plotMult: warning in rgb(0, 0, 255, alpha = alpha, max = 256): partial
+  argument match of 'max' to 'maxColorValue'
+plotSim: warning in rgb(0, 0, 255, alpha = alpha, max = 256): partial
+  argument match of 'max' to 'maxColorValue'
+LB.worker: no visible binding for global variable '.LB.args'
+PERC_SPR2fmult: no visible binding for global variable 'debug2'
+PERC_SPR2fmult.20100210: no visible binding for global variable
+  'debug2'
+SS_writestarter: no visible binding for global variable 'FRUE'
+bubble: no visible binding for global variable 'panel.bubble'
+bubble: no visible global function definition for 'coordinates'
+bubble: no visible global function definition for 'xyplot'
+bubble: no visible global function definition for 'mapasp'
+calFAA.ss3.x : solv.Feq.new: no visible global function definition for
+  'foreach'
+calFAA.ss3.x: no visible binding for global variable 'tocatch'
+calFAA.ss3.x: no visible binding for global variable 'gender'
+calFAA.ss3.x: no visible global function definition for 'plotFvalue2'
+calcBRP: no visible global function definition for 'file.exist'
+calcBRP.20110315: no visible binding for global variable 'report'
+calcBRP.20110315_2: no visible global function definition for
+  'file.exist'
+calcCW.ypr.new: no visible binding for global variable 'nfleet'
+calcCW.ypr.new: no visible binding for global variable 'fmort'
+calcF0.1: no visible binding for global variable 'fmult'
+calcFAA : solv.Feq.new: no visible global function definition for
+  'foreach'
+calcFAA: no visible binding for global variable 'tocatch'
+calcFAA: no visible binding for global variable 'gender'
+calcFAA: no visible global function definition for 'plotFvalue2'
+do.boot: no visible global function definition for 'startWorkers'
+do.boot: no visible global function definition for 'registerDoSMP'
+do.boot: no visible global function definition for 'registerDoMC'
+do.boot: no visible global function definition for 'getAbsolutePath'
+do.boot : exit.fun: no visible global function definition for
+  'stopWorkers'
+do.boot : exit.fun: no visible global function definition for 'sfStop'
+do.boot : exit.fun : <anonymous>: no visible global function definition
+  for 'sendmail'
+do.boot : do1bootsim: no visible global function definition for
+  'getAbsolutePath'
+do.boot : do1bootsim: no visible global function definition for
+  'getParent'
+do.boot : do1bootsim: no visible global function definition for
+  'getRelativePath'
+do.boot: no visible global function definition for '%dopar%'
+do.boot: no visible global function definition for 'foreach'
+do.boot: no visible binding for global variable 'x'
+do.boot: no visible global function definition for '%do%'
+do.boot: no visible global function definition for 'sfInit'
+do.boot: no visible global function definition for 'sfLibrary'
+do.boot: no visible binding for global variable 'R.utils'
+do.boot: no visible binding for global variable 'plyr'
+do.boot: no visible binding for global variable 'reshape2'
+do.boot: no visible global function definition for 'sfExport'
+do.boot: no visible global function definition for 'sfLapply'
+do.retro : exit.fun: no visible global function definition for 'sfStop'
+do.retro : exit.fun : <anonymous>: no visible global function
+  definition for 'sendmail'
+do.retro: no visible global function definition for 'sfInit'
+do.retro: no visible global function definition for 'sfExport'
+do.retro: no visible global function definition for 'sfLapply'
+get.info: no visible binding for global variable 'naa'
+getAbsolutePath.default: no visible global function definition for
+  'throw'
+getAbsolutePath.default: no visible global function definition for
+  'isAbsolutePath'
+getAbsolutePath.default: no visible global function definition for
+  'filePath'
+getCPUEfit : tmp.fnc: no visible global function definition for
+  'xyplot'
+getCPUEfit : tmp.fnc: no visible global function definition for
+  'histogram'
+getCPUEfit : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.histogram'
+getCPUEfit : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.densityplot'
+getCPUEfit.ss3.x : tmp.fnc: no visible global function definition for
+  'xyplot'
+getCPUEfit.ss3.x : tmp.fnc: no visible global function definition for
+  'histogram'
+getCPUEfit.ss3.x : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.histogram'
+getCPUEfit.ss3.x : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.densityplot'
+getDatafromDat: no visible binding for global variable 'dat.new'
+getNAA.y: no visible global function definition for 'melt'
+getNAA.y.ss3: no visible global function definition for 'melt'
+init.graph: no visible global function definition for 'CairoPDF'
+init.graph: no visible global function definition for 'CairoWin'
+init.graph: no visible global function definition for 'CairoSVG'
+init.graph: no visible global function definition for 'CairoPS'
+init.graph: no visible global function definition for 'trellis.par.get'
+init.graph: no visible global function definition for 'trellis.par.set'
+init.graph: no visible global function definition for 'ggplot2like'
+init.graph: no visible global function definition for 'lattice.options'
+init.graph: no visible global function definition for
+  'ggplot2like.opts'
+init.graph : exit.fn: no visible global function definition for
+  'trellis.par.set'
+init.graph : exit.fn: no visible global function definition for
+  'lattice.options'
+make.SRfn : SRfn: no visible binding for global variable 'steepness'
+make.SRfn : SRfn: no visible global function definition for 'join_Fxn'
+make.projection: no visible global function definition for 'abind'
+make.projection: no visible binding for global variable 'faa.array'
+make.projection: no visible global function definition for
+  'registerDoSEQ'
+make.projection: no visible global function definition for '%do%'
+make.projection: no visible global function definition for 'foreach'
+make.projection: no visible binding for global variable '.inorder'
+make.projection: no visible binding for global variable 'x'
+make.projection : project1: no visible binding for global variable
+  'Ages'
+make.projection : project1: no visible global function definition for
+  'calcSSB'
+make.projection: no visible binding for global variable 'i'
+makeCPUEfit : tmp.fnc: no visible global function definition for
+  'xyplot'
+makeCPUEfit : tmp.fnc: no visible global function definition for
+  'histogram'
+makeCPUEfit : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.histogram'
+makeCPUEfit : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.densityplot'
+parLapplyLB: no visible global function definition for 'clusterCall'
+parLapplyLB: no visible global function definition for 'clusterApplyLB'
+parLapplyLB: no visible global function definition for 'clusterEvalQ'
+plotCI: no visible global function definition for 'aes'
+plotCI: no visible global function definition for 'qplot'
+plotCI: no visible global function definition for 'geom_line'
+plotCI: no visible global function definition for 'geom_point'
+plotCI: no visible global function definition for 'geom_errorbar'
+plotChiSq: no visible global function definition for 'trellis.par.get'
+plotChiSq: no visible global function definition for 'trellis.par.set'
+plotChiSq: no visible global function definition for 'ggplot2like'
+plotChiSq: no visible global function definition for 'lattice.options'
+plotChiSq: no visible global function definition for 'ggplot2like.opts'
+plotChiSq : exit.fn: no visible global function definition for
+  'trellis.par.set'
+plotChiSq : exit.fn: no visible global function definition for
+  'lattice.options'
+plotChiSq: no visible global function definition for 'xyplot'
+plotChiSq: no visible binding for global variable 'Season'
+plotChiSq: no visible global function definition for 'densityplot'
+plotChiSq: no visible binding for global variable 'aa'
+plotComps: no visible binding for global variable 'repfile'
+plotComps: no visible binding for global variable 'len.rep'
+plotComps: no visible binding for global variable 'col.var'
+plotComps: no visible binding for global variable 'lty.var'
+plotComps.lattice : tmp.fn: no visible binding for global variable
+  'Bin'
+plotComps.lattice : tmp.fn: no visible global function definition for
+  'xyplot'
+plotComps.lattice : tmp.fn: no visible global function definition for
+  'simpleTheme'
+plotEffNts : <anonymous>: no visible binding for global variable 'ax1'
+plotEffNts : <anonymous>: no visible global function definition for
+  'xyplot'
+plotFAA.y: no visible global function definition for 'trellis.par.get'
+plotFAA.y: no visible global function definition for 'trellis.par.set'
+plotFAA.y: no visible global function definition for 'ggplot2like'
+plotFAA.y: no visible global function definition for 'lattice.options'
+plotFAA.y: no visible global function definition for 'ggplot2like.opts'
+plotFAA.y : exit.fn: no visible binding for global variable 'type'
+plotFAA.y : exit.fn: no visible global function definition for
+  'trellis.par.set'
+plotFAA.y : exit.fn: no visible global function definition for
+  'lattice.options'
+plotFAA.y: no visible global function definition for 'levelplot'
+plotFAA.y3d: no visible global function definition for 'persp3d'
+plotMult: no visible binding for global variable 'sims'
+plotNAA.y: no visible global function definition for 'trellis.par.get'
+plotNAA.y: no visible binding for global variable 'ggplotlike'
+plotNAA.y: no visible global function definition for 'trellis.par.set'
+plotNAA.y: no visible global function definition for 'ggplot2like'
+plotNAA.y: no visible global function definition for 'lattice.options'
+plotNAA.y: no visible global function definition for 'ggplot2like.opts'
+plotNAA.y : exit.fn: no visible binding for global variable 'type'
+plotNAA.y : exit.fn: no visible global function definition for
+  'trellis.par.set'
+plotNAA.y : exit.fn: no visible binding for global variable
+  'ggplotlike'
+plotNAA.y : exit.fn: no visible global function definition for
+  'lattice.options'
+plotNAA.y: no visible global function definition for 'wireframe'
+plotPearson: no visible global function definition for 'brewer.pal'
+plotPearson : tmp.fnc: no visible binding for global variable 'Bin'
+plotPearson : tmp.fnc: no visible global function definition for
+  'xyplot'
+plotPearson : tmp.fnc: no visible global function definition for
+  'levelplot'
+plotPearson : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.xyplot'
+plotPearson : tmp.fnc: no visible global function definition for
+  'histogram'
+plotPearson : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.histogram'
+plotPearson : tmp.fnc : <anonymous>: no visible global function
+  definition for 'panel.densityplot'
+plotPearson : tmp.fnc: no visible binding for global variable 'Seas'
+plotPearson.trad: no visible binding for global variable 'Bin'
+plotSim: no visible global function definition for 'CairoPDF'
+prj.annual: no visible global function definition for 'getNAA.y.ss3.x'
+prj.annual: no visible global function definition for 'getCAA.y.ss3.x'
+read.Exploitation: possible error in readDat(report = report,
+  header.char = header.char, footer.char = NULL, blankLines =
+  blankLines, colClasses = NULL, col.names = NULL, as.numeric.col =
+  NULL, as.numeric.as.possible = FALSE, skip = 4, debug = debug,
+  skip.col.names = 4): unused argument(s) (debug = debug)
+read.Exploitation: no visible binding for global variable 'header'
+read.SPR: possible error in readDat(report = report, header.char =
+  header.char, footer.char = NULL, blankLines = blankLines, colClasses
+  = NULL, col.names = NULL, as.numeric.col = NULL,
+  as.numeric.as.possible = FALSE, skip = 5, debug = debug,
+  skip.col.names = 4): unused argument(s) (debug = debug)
+read.Selex.ts: possible error in readDat(report = report, header.char =
+  header.char, footer.char = NULL, blankLines = blankLines, colClasses
+  = NULL, col.names = NULL, as.numeric.col = NULL,
+  as.numeric.as.possible = FALSE, skip = 1, debug = FALSE,
+  skip.col.names = -1): unused argument(s) (debug = FALSE)
+read.covar: no visible binding for global variable 'hea'
+read.spawner_recruit : SRfn: no visible binding for global variable
+  'steepness'
+read.spawner_recruit : SRfn: no visible global function definition for
+  'join_Fxn'
+read.spawner_recruit: no visible global function definition for
+  'xyplot'
+read.spawner_recruit : <anonymous>: no visible global function
+  definition for 'panel.curve'
+read.spawner_recruit : <anonymous>: no visible global function
+  definition for 'panel.xyplot'
+read.spawner_recruit : <anonymous>: no visible global function
+  definition for 'panel.grid'
+read.starter: no visible binding for global variable 'i'
+read.starter: no visible binding for global variable 'cutList'
+read.starter: no visible binding for global variable 'verboseDisplay'
+readDat: possible error in readDat.0(header.char = header.char, report
+  = report, blankLines = blankLines, skip = skip, header = header,
+  footer.char = footer.char, col.names = col.names, skip.col.names =
+  skip.col.names, checkEndRec = checkEndRec, colClasses = colClasses,
+  as.numeric.as.possible = as.numeric.as.possible, as.numeric.col =
+  as.numeric.col, headeL = headerL): unused argument(s) (headeL =
+  headerL)
+readDat.0 : tmp.fn: no visible binding for global variable 'compoent'
+readDat.trad : <anonymous>: no visible binding for global variable
+  'compoent'
+readLinesInteract: no visible global function definition for
+  'getAbsolutePath'
+readWithComments: no visible binding for global variable 'filenme'
+sfLapplyLB: no visible global function definition for 'sfCheck'
+sfLapplyLB: no visible global function definition for 'checkFunction'
+sfLapplyLB: no visible global function definition for 'sfParallel'
+sfLapplyLB: no visible global function definition for 'sfGetCluster'
+summaryProfile: no visible global function definition for 'CairoPDF'
+summarySS: no visible binding for global variable 'plot.type'
+summarySS : panel: no visible global function definition for
+  'panel.xYplot'
+summarySS : panel: no visible global function definition for
+  'panel.grid'
+summarySS: no visible global function definition for 'xYplot'
+summarySS: no visible global function definition for 'levelplot'
+summarySS: no visible global function definition for 'melt.array'
+* checking Rd files ... WARNING
+prepare_Rd: arr2coh.Rd:82-84: Dropping empty section \description
+prepare_Rd: arr2coh.Rd:94-96: Dropping empty section \details
+prepare_Rd: arr2coh.Rd:97-103: Dropping empty section \value
+prepare_Rd: arr2coh.Rd:110-112: Dropping empty section \note
+prepare_Rd: arr2coh.Rd:107-109: Dropping empty section \author
+prepare_Rd: arr2coh.Rd:104-106: Dropping empty section \references
+prepare_Rd: arr2coh.Rd:116-118: Dropping empty section \seealso
+checkRd: (5) arr2coh.Rd:0-140: Must have a \description
+* checking Rd metadata ... OK
+* checking Rd cross-references ... WARNING
+Unknown package(s) '<pkg>' in Rd xrefs
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  'calcBRP' 'calcFAA' 'calcFAA.ypr' 'calcFMSY' 'calcFloss' 'calcFmax'
+  'calcFmed' 'getAgecomp' 'getCAA' 'getCAA.y' 'getFAA.y' 'getFmort.ypr'
+  'getFmort.ypr.0' 'getNAA' 'getNAA.y' 'getNMA' 'getReport' 'make.SRfn'
+  'makeCPUEfit' 'plotChiSq' 'plotFAA.y' 'plotFAA.y3d' 'plotNAA.y'
+  'print.BRPnew' 'readDat.trad'
+All user-level objects in a package should have documentation entries.
+See the chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Objects in \usage without \alias in documentation object 'arr2coh':
+  'arr2coh'
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See the chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of 'data' directory ... WARNING
+Files not of a type allowed in a 'data' directory:
+  'Report.sso'
+Please use e.g. 'inst/extdata' for non-R data files
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... ERROR
+Running examples in 'ss.utils-Ex.R' failed
+The error most likely occurred in:
+
+> ### Name: ss.utils-package
+> ### Title: package of set of small functions for SS
+> ### Aliases: ss.utils-package ss.utils
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+>   getwd()
+[1] "/Users/yukiot/Dropbox/Rscript/Projection/ss.utils/ss.utils.Rcheck"
+>   calcBRP(year=2007:2009,repfile="../ss.utils/data/Report.sso")
+readDat.trad is called in line 132 of readDat.r
+HERE102
+ [1] "Area"        "Bio_Pattern" "Gender"      "BirthSeas"   "SubMorph"   
+ [6] "Morph"       "Yr"          "Seas"        "Time"        "Beg/Mid"    
+[11] "Era"         "0"           "1"           "2"           "3"          
+[16] "4"           "5"           "6"           "7"           "8"          
+[21] "9"           "10"          "11"          "12"          "13"         
+[26] "14"          "15"          "16"          "17"          "18"         
+[31] "19"          "20"         
+
+[1] ! Warning, this function tested on SS-V3.24f. You are using SS-V3.23b
+checkSSversion
+readDat.trad is called in line 132 of readDat.r
+HERE102
+ [1] "Area"   "Fleet"  "Gender" "XX"     "XX"     "Morph"  "Yr"     "Seas"  
+ [9] "XX"     "Era"    "0"      "1"      "2"      "3"      "4"      "5"     
+[17] "6"      "7"      "8"      "9"      "10"     "11"     "12"     "13"    
+[25] "14"     "15"     "16"     "17"     "18"     "19"     "20"    
+
+readDat.trad is called in line 132 of readDat.r
+HERE102
+ [1] "Seas"        "Morph"       "Bio_Pattern" "Gender"      "BirthSeas"  
+ [6] "SubMorph"    "Age"         "Age_Beg"     "Age_Mid"     "M"          
+[11] "Len_Beg"     "Len_Mid"     "SD_Beg"      "SD_Mid"      "Wt_Beg"     
+[16] "Wt_Mid"      "Len_Mat"     "Age_Mat"     "Mat*Fecund"  "Len:_1"     
+[21] "SelWt:_1"    "RetWt:_1"    "Len:_2"      "SelWt:_2"    "RetWt:_2"   
+[26] "Len:_3"      "SelWt:_3"    "RetWt:_3"    "Len:_4"      "SelWt:_4"   
+[31] "RetWt:_4"    "Len:_5"      "SelWt:_5"    "RetWt:_5"    "Len:_6"     
+[36] "SelWt:_6"    "RetWt:_6"    "Len:_7"      "SelWt:_7"    "RetWt:_7"   
+[41] "Len:_8"      "SelWt:_8"    "RetWt:_8"    "Len:_9"      "SelWt:_9"   
+[46] "RetWt:_9"    "Len:_10"     "SelWt:_10"   "RetWt:_10"   "Len:_11"    
+[51] "SelWt:_11"   "RetWt:_11"   "Len:_12"     "SelWt:_12"   "RetWt:_12"  
+[56] "Len:_13"     "SelWt:_13"   "RetWt:_13"   "Len:_14"     "SelWt:_14"  
+[61] "RetWt:_14"   "Len:_15"     "SelWt:_15"   "RetWt:_15"   "Len:_16"    
+[66] "SelWt:_16"   "RetWt:_16"   "Len:_17"     "SelWt:_17"   "RetWt:_17"  
+[71] "Len:_18"     "SelWt:_18"   "RetWt:_18"   "Len:_19"     "SelWt:_19"  
+[76] "RetWt:_19"   "Len:_20"     "SelWt:_20"   "RetWt:_20"   "Len:_21"    
+[81] "SelWt:_21"   "RetWt:_21"   "Len:_22"     "SelWt:_22"   "RetWt:_22"  
+[86] "Len:_23"     "SelWt:_23"   "RetWt:_23"   "Len:_24"     "SelWt:_24"  
+[91] "RetWt:_24"   "Len:_25"     "SelWt:_25"   "RetWt:_25"  
+
+HERE142 in readDat.r
+'data.frame':	84 obs. of  94 variables:
+ $ Seas       : chr  "1" "1" "1" "1" ...
+ $ Morph      : chr  "1" "1" "1" "1" ...
+ $ Bio_Pattern: chr  "1" "1" "1" "1" ...
+ $ Gender     : chr  "1" "1" "1" "1" ...
+ $ BirthSeas  : chr  "1" "1" "1" "1" ...
+ $ SubMorph   : chr  "1" "1" "1" "1" ...
+ $ Age        : chr  "0" "1" "2" "3" ...
+ $ Age_Beg    : chr  "0" "1" "2" "3" ...
+ $ Age_Mid    : chr  "0.125" "1.125" "2.125" "3.125" ...
+ $ M          : chr  "1.6" "0.386" "0.25" "0.25" ...
+ $ Len_Beg    : chr  "21.5" "55.4357" "84.4268" "109.194" ...
+ $ Len_Mid    : chr  "26.0399" "59.3141" "87.7402" "112.025" ...
+ $ SD_Beg     : chr  "5.63682" "9.92422" "9.2697" "5.5597" ...
+ $ SD_Mid     : chr  "6.5262" "10.0671" "8.94159" "5.70123" ...
+ $ Wt_Beg     : chr  "0.240449" "3.73803" "12.6601" "26.8777" ...
+ $ Wt_Mid     : chr  "0.412386" "4.5485" "14.1598" "29.0506" ...
+ $ Len_Mat    : chr  "1" "1" "1" "1" ...
+ $ Age_Mat    : chr  "0" "0" "0" "0.2" ...
+ $ Mat*Fecund : chr  "0" "0" "0" "8.17872" ...
+ $ Len:_1     : chr  "26.3109" "59.4604" "111.911" "122.325" ...
+ $ SelWt:_1   : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ RetWt:_1   : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ Len:_2     : chr  "42.5908" "58.3426" "79.704" "105.736" ...
+ $ SelWt:_2   : chr  "1.55922" "4.18735" "10.5575" "24.3751" ...
+ $ RetWt:_2   : chr  "1.55922" "4.18735" "10.5575" "24.3751" ...
+ $ Len:_3     : chr  "26.3693" "96.6666" "105.756" "114.852" ...
+ $ SelWt:_3   : chr  "0.416457" "18.6523" "24.4307" "31.251" ...
+ $ RetWt:_3   : chr  "0.416457" "18.6523" "24.4307" "31.251" ...
+ $ Len:_4     : chr  "32.7587" "67.8029" "90.5844" "112.038" ...
+ $ SelWt:_4   : chr  "0.76632" "6.62127" "15.5056" "29.0566" ...
+ $ RetWt:_4   : chr  "0.76632" "6.62127" "15.5056" "29.0566" ...
+ $ Len:_5     : chr  "30.5468" "54.8895" "67.8305" "99.6926" ...
+ $ SelWt:_5   : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ RetWt:_5   : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ Len:_6     : chr  "30.5468" "54.8895" "67.8305" "99.6926" ...
+ $ SelWt:_6   : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ RetWt:_6   : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ Len:_7     : chr  "35.2592" "66.4052" "87.3882" "110.366" ...
+ $ SelWt:_7   : chr  "0.932415" "6.17557" "13.9211" "27.7566" ...
+ $ RetWt:_7   : chr  "0.932415" "6.17557" "13.9211" "27.7566" ...
+ $ Len:_8     : chr  "30.0389" "60.5952" "87.3512" "111.142" ...
+ $ SelWt:_8   : chr  "0.582121" "4.80943" "13.9477" "28.3574" ...
+ $ RetWt:_8   : chr  "0.582121" "4.80943" "13.9477" "28.3574" ...
+ $ Len:_9     : chr  "32.6467" "63.4068" "85.7448" "108.589" ...
+ $ SelWt:_9   : chr  "0.744577" "5.42276" "13.134" "26.4176" ...
+ $ RetWt:_9   : chr  "0.744577" "5.42276" "13.134" "26.4176" ...
+ $ Len:_10    : chr  "44.8127" "65.2928" "87.3686" "111.666" ...
+ $ SelWt:_10  : chr  "1.84411" "5.80483" "13.9708" "28.769" ...
+ $ RetWt:_10  : chr  "1.84411" "5.80483" "13.9708" "28.769" ...
+ $ Len:_11    : chr  "33.1242" "76.1928" "101.067" "117.475" ...
+ $ SelWt:_11  : chr  "0.79785" "9.41889" "21.5913" "33.5373" ...
+ $ RetWt:_11  : chr  "0.79785" "9.41889" "21.5913" "33.5373" ...
+ $ Len:_12    : chr  "26.3771" "74.3994" "87.4246" "110.099" ...
+ $ SelWt:_12  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+ $ RetWt:_12  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+ $ Len:_13    : chr  "26.3771" "74.3994" "87.4246" "110.099" ...
+ $ SelWt:_13  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+ $ RetWt:_13  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+ $ Len:_14    : chr  "26.3309" "61.827" "87.7422" "112.025" ...
+ $ SelWt:_14  : chr  "0.415821" "5.03757" "14.1604" "29.0506" ...
+ $ RetWt:_14  : chr  "0.415821" "5.03757" "14.1604" "29.0506" ...
+ $ Len:_15    : chr  "26.3109" "59.4604" "111.911" "122.325" ...
+ $ SelWt:_15  : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ RetWt:_15  : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ Len:_16    : chr  "26.3109" "59.4604" "111.911" "122.325" ...
+ $ SelWt:_16  : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ RetWt:_16  : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ Len:_17    : chr  "26.3109" "59.4604" "111.911" "122.325" ...
+ $ SelWt:_17  : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ RetWt:_17  : chr  "0.413681" "4.58664" "29.7305" "37.8689" ...
+ $ Len:_18    : chr  "26.3693" "96.6666" "105.756" "114.852" ...
+ $ SelWt:_18  : chr  "0.416457" "18.6523" "24.4307" "31.251" ...
+ $ RetWt:_18  : chr  "0.416457" "18.6523" "24.4307" "31.251" ...
+ $ Len:_19    : chr  "30.5468" "54.8895" "67.8305" "99.6926" ...
+ $ SelWt:_19  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ RetWt:_19  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ Len:_20    : chr  "30.5468" "54.8895" "67.8305" "99.6926" ...
+ $ SelWt:_20  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ RetWt:_20  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ Len:_21    : chr  "30.5468" "54.8895" "67.8305" "99.6926" ...
+ $ SelWt:_21  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ RetWt:_21  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ Len:_22    : chr  "30.5468" "54.8895" "67.8305" "99.6926" ...
+ $ SelWt:_22  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ RetWt:_22  : chr  "0.622303" "3.46077" "6.41007" "21.137" ...
+ $ Len:_23    : chr  "33.1242" "76.1928" "101.067" "117.475" ...
+ $ SelWt:_23  : chr  "0.79785" "9.41889" "21.5913" "33.5373" ...
+ $ RetWt:_23  : chr  "0.79785" "9.41889" "21.5913" "33.5373" ...
+ $ Len:_24    : chr  "26.3771" "74.3994" "87.4246" "110.099" ...
+ $ SelWt:_24  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+ $ RetWt:_24  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+ $ Len:_25    : chr  "26.3771" "74.3994" "87.4246" "110.099" ...
+ $ SelWt:_25  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+ $ RetWt:_25  : chr  "0.426692" "8.45501" "13.8964" "27.5541" ...
+NULL
+
+'data.frame':	84 obs. of  94 variables:
+ $ Seas       : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ Morph      : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ Bio_Pattern: num  1 1 1 1 1 1 1 1 1 1 ...
+ $ Gender     : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ BirthSeas  : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ SubMorph   : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ Age        : num  0 1 2 3 4 5 6 7 8 9 ...
+ $ Age_Beg    : num  0 1 2 3 4 5 6 7 8 9 ...
+ $ Age_Mid    : num  0.125 1.125 2.125 3.125 4.125 ...
+ $ M          : num  1.6 0.386 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 ...
+ $ Len_Beg    : num  21.5 55.4 84.4 109.2 130.4 ...
+ $ Len_Mid    : num  26 59.3 87.7 112 132.8 ...
+ $ SD_Beg     : num  5.64 9.92 9.27 5.56 6.62 ...
+ $ SD_Mid     : num  6.53 10.07 8.94 5.7 6.74 ...
+ $ Wt_Beg     : num  0.24 3.74 12.66 26.88 46.03 ...
+ $ Wt_Mid     : num  0.412 4.548 14.16 29.051 48.676 ...
+ $ Len_Mat    : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ Age_Mat    : num  0 0 0 0.2 0.5 1 1 1 1 1 ...
+ $ Mat.Fecund : num  0 0 0 8.18 31.26 ...
+ $ Len._1     : num  26.3 59.5 111.9 122.3 142.8 ...
+ $ SelWt._1   : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ RetWt._1   : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ Len._2     : num  42.6 58.3 79.7 105.7 121.5 ...
+ $ SelWt._2   : num  1.56 4.19 10.56 24.38 37.17 ...
+ $ RetWt._2   : num  1.56 4.19 10.56 24.38 37.17 ...
+ $ Len._3     : num  26.4 96.7 105.8 114.9 132.4 ...
+ $ SelWt._3   : num  0.416 18.652 24.431 31.251 48.219 ...
+ $ RetWt._3   : num  0.416 18.652 24.431 31.251 48.219 ...
+ $ Len._4     : num  32.8 67.8 90.6 112 132.5 ...
+ $ SelWt._4   : num  0.766 6.621 15.506 29.057 48.389 ...
+ $ RetWt._4   : num  0.766 6.621 15.506 29.057 48.389 ...
+ $ Len._5     : num  30.5 54.9 67.8 99.7 132.6 ...
+ $ SelWt._5   : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ RetWt._5   : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ Len._6     : num  30.5 54.9 67.8 99.7 132.6 ...
+ $ SelWt._6   : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ RetWt._6   : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ Len._7     : num  35.3 66.4 87.4 110.4 128.8 ...
+ $ SelWt._7   : num  0.932 6.176 13.921 27.757 44.417 ...
+ $ RetWt._7   : num  0.932 6.176 13.921 27.757 44.417 ...
+ $ Len._8     : num  30 60.6 87.4 111.1 130.7 ...
+ $ SelWt._8   : num  0.582 4.809 13.948 28.357 46.368 ...
+ $ RetWt._8   : num  0.582 4.809 13.948 28.357 46.368 ...
+ $ Len._9     : num  32.6 63.4 85.7 108.6 125.3 ...
+ $ SelWt._9   : num  0.745 5.423 13.134 26.418 40.778 ...
+ $ RetWt._9   : num  0.745 5.423 13.134 26.418 40.778 ...
+ $ Len._10    : num  44.8 65.3 87.4 111.7 132 ...
+ $ SelWt._10  : num  1.84 5.8 13.97 28.77 47.87 ...
+ $ RetWt._10  : num  1.84 5.8 13.97 28.77 47.87 ...
+ $ Len._11    : num  33.1 76.2 101.1 117.5 140.4 ...
+ $ SelWt._11  : num  0.798 9.419 21.591 33.537 57.587 ...
+ $ RetWt._11  : num  0.798 9.419 21.591 33.537 57.587 ...
+ $ Len._12    : num  26.4 74.4 87.4 110.1 128.4 ...
+ $ SelWt._12  : num  0.427 8.455 13.896 27.554 44 ...
+ $ RetWt._12  : num  0.427 8.455 13.896 27.554 44 ...
+ $ Len._13    : num  26.4 74.4 87.4 110.1 128.4 ...
+ $ SelWt._13  : num  0.427 8.455 13.896 27.554 44 ...
+ $ RetWt._13  : num  0.427 8.455 13.896 27.554 44 ...
+ $ Len._14    : num  26.3 61.8 87.7 112 132.8 ...
+ $ SelWt._14  : num  0.416 5.038 14.16 29.051 48.675 ...
+ $ RetWt._14  : num  0.416 5.038 14.16 29.051 48.675 ...
+ $ Len._15    : num  26.3 59.5 111.9 122.3 142.8 ...
+ $ SelWt._15  : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ RetWt._15  : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ Len._16    : num  26.3 59.5 111.9 122.3 142.8 ...
+ $ SelWt._16  : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ RetWt._16  : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ Len._17    : num  26.3 59.5 111.9 122.3 142.8 ...
+ $ SelWt._17  : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ RetWt._17  : num  0.414 4.587 29.73 37.869 60.606 ...
+ $ Len._18    : num  26.4 96.7 105.8 114.9 132.4 ...
+ $ SelWt._18  : num  0.416 18.652 24.431 31.251 48.219 ...
+ $ RetWt._18  : num  0.416 18.652 24.431 31.251 48.219 ...
+ $ Len._19    : num  30.5 54.9 67.8 99.7 132.6 ...
+ $ SelWt._19  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ RetWt._19  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ Len._20    : num  30.5 54.9 67.8 99.7 132.6 ...
+ $ SelWt._20  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ RetWt._20  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ Len._21    : num  30.5 54.9 67.8 99.7 132.6 ...
+ $ SelWt._21  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ RetWt._21  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ Len._22    : num  30.5 54.9 67.8 99.7 132.6 ...
+ $ SelWt._22  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ RetWt._22  : num  0.622 3.461 6.41 21.137 48.51 ...
+ $ Len._23    : num  33.1 76.2 101.1 117.5 140.4 ...
+ $ SelWt._23  : num  0.798 9.419 21.591 33.537 57.587 ...
+ $ RetWt._23  : num  0.798 9.419 21.591 33.537 57.587 ...
+ $ Len._24    : num  26.4 74.4 87.4 110.1 128.4 ...
+ $ SelWt._24  : num  0.427 8.455 13.896 27.554 44 ...
+ $ RetWt._24  : num  0.427 8.455 13.896 27.554 44 ...
+ $ Len._25    : num  26.4 74.4 87.4 110.1 128.4 ...
+ $ SelWt._25  : num  0.427 8.455 13.896 27.554 44 ...
+ $ RetWt._25  : num  0.427 8.455 13.896 27.554 44 ...
+NULL
+readDat.trad is called in line 132 of readDat.r
+HERE102
+[1] "G_pattern" "Gender"    "Seas"      "Area"      "Value"     "Used?"    
+
+HERE142 in readDat.r
+'data.frame':	4 obs. of  6 variables:
+ $ G_pattern: chr  "1" "1" "1" "1"
+ $ Gender   : chr  "1" "1" "1" "1"
+ $ Seas     : chr  "1" "2" "3" "4"
+ $ Area     : chr  "1" "1" "1" "1"
+ $ Value    : chr  "1" "0" "0" "0"
+ $ Used?    : chr  "1" "0" "0" "0"
+NULL
+
+'data.frame':	4 obs. of  6 variables:
+ $ G_pattern: num  1 1 1 1
+ $ Gender   : num  1 1 1 1
+ $ Seas     : num  1 2 3 4
+ $ Area     : num  1 1 1 1
+ $ Value    : num  1 0 0 0
+ $ Used.    : num  1 0 0 0
+NULL
+[1] ! Warning, this function tested on SS-V3.24f. You are using SS-V3.23b
+checkSSversion
+readDat.trad is called in line 132 of readDat.r
+HERE102
+[1] "Index"                 "Gpattern"              "Gender"               
+[4] "Bseas"                 "Sub_Morph"             "Sub_Morph_Dist"       
+[7] "Gpattern_Gender"       "Gpattern_Gender_Bseas" "BirthAge_Rel_Jan1"    
+
+HERE142 in readDat.r
+'data.frame':	4 obs. of  9 variables:
+ $ Index                : chr  "1" "2" "3" "4"
+ $ Gpattern             : chr  "1" "1" "1" "1"
+ $ Gender               : chr  "1" "1" "1" "1"
+ $ Bseas                : chr  "1" "2" "3" "4"
+ $ Sub_Morph            : chr  "1" "1" "1" "1"
+ $ Sub_Morph_Dist       : chr  "1" "1" "1" "1"
+ $ Gpattern_Gender      : chr  "1" "1" "1" "1"
+ $ Gpattern_Gender_Bseas: chr  "1" "2" "3" "4"
+ $ BirthAge_Rel_Jan1    : chr  "0" "0.25" "0.5" "0.75"
+NULL
+
+'data.frame':	4 obs. of  9 variables:
+ $ Index                : num  1 2 3 4
+ $ Gpattern             : num  1 1 1 1
+ $ Gender               : num  1 1 1 1
+ $ Bseas                : num  1 2 3 4
+ $ Sub_Morph            : num  1 1 1 1
+ $ Sub_Morph_Dist       : num  1 1 1 1
+ $ Gpattern_Gender      : num  1 1 1 1
+ $ Gpattern_Gender_Bseas: num  1 2 3 4
+ $ BirthAge_Rel_Jan1    : num  0 0.25 0.5 0.75
+NULL
+readDat.trad is called in line 132 of readDat.r
+HERE102
+  [1] "Area"              "Yr"                "Era"              
+  [4] "Seas"              "Bio_all"           "Bio_smry"         
+  [7] "SpawnBio"          "Recruit_0"         "Spbio_GP:1"       
+ [10] "SmryBio_SX:1_GP:1" "SmryNum_SX:1_GP:1" "sel(B):_1"        
+ [13] "dead(B):_1"        "retain(B):_1"      "sel(N):_1"        
+ [16] "dead(N):_1"        "retain(N):_1"      "obs_cat:_1"       
+ [19] "F:_1"              "sel(B):_2"         "dead(B):_2"       
+ [22] "retain(B):_2"      "sel(N):_2"         "dead(N):_2"       
+ [25] "retain(N):_2"      "obs_cat:_2"        "F:_2"             
+ [28] "sel(B):_3"         "dead(B):_3"        "retain(B):_3"     
+ [31] "sel(N):_3"         "dead(N):_3"        "retain(N):_3"     
+ [34] "obs_cat:_3"        "F:_3"              "sel(B):_4"        
+ [37] "dead(B):_4"        "retain(B):_4"      "sel(N):_4"        
+ [40] "dead(N):_4"        "retain(N):_4"      "obs_cat:_4"       
+ [43] "F:_4"              "sel(B):_5"         "dead(B):_5"       
+ [46] "retain(B):_5"      "sel(N):_5"         "dead(N):_5"       
+ [49] "retain(N):_5"      "obs_cat:_5"        "F:_5"             
+ [52] "sel(B):_6"         "dead(B):_6"        "retain(B):_6"     
+ [55] "sel(N):_6"         "dead(N):_6"        "retain(N):_6"     
+ [58] "obs_cat:_6"        "F:_6"              "sel(B):_7"        
+ [61] "dead(B):_7"        "retain(B):_7"      "sel(N):_7"        
+ [64] "dead(N):_7"        "retain(N):_7"      "obs_cat:_7"       
+ [67] "F:_7"              "sel(B):_8"         "dead(B):_8"       
+ [70] "retain(B):_8"      "sel(N):_8"         "dead(N):_8"       
+ [73] "retain(N):_8"      "obs_cat:_8"        "F:_8"             
+ [76] "sel(B):_9"         "dead(B):_9"        "retain(B):_9"     
+ [79] "sel(N):_9"         "dead(N):_9"        "retain(N):_9"     
+ [82] "obs_cat:_9"        "F:_9"              "sel(B):_10"       
+ [85] "dead(B):_10"       "retain(B):_10"     "sel(N):_10"       
+ [88] "dead(N):_10"       "retain(N):_10"     "obs_cat:_10"      
+ [91] "F:_10"             "sel(B):_11"        "dead(B):_11"      
+ [94] "retain(B):_11"     "sel(N):_11"        "dead(N):_11"      
+ [97] "retain(N):_11"     "obs_cat:_11"       "F:_11"            
+[100] "sel(B):_12"        "dead(B):_12"       "retain(B):_12"    
+[103] "sel(N):_12"        "dead(N):_12"       "retain(N):_12"    
+[106] "obs_cat:_12"       "F:_12"             "sel(B):_13"       
+[109] "dead(B):_13"       "retain(B):_13"     "sel(N):_13"       
+[112] "dead(N):_13"       "retain(N):_13"     "obs_cat:_13"      
+[115] "F:_13"             "sel(B):_14"        "dead(B):_14"      
+[118] "retain(B):_14"     "sel(N):_14"        "dead(N):_14"      
+[121] "retain(N):_14"     "obs_cat:_14"       "F:_14"            
+[124] "SPB_vir_LH"       
+
+Warning in `[.data.frame`(Babs, !is.na(as.numeric(Babs$SpawnBio)), "Seas") :
+  NAs introduced by coercion
+Loading required package: compiler
+[1] ! Warning, this function tested on SS-V3.24f. You are using SS-V3.23b
+checkSSversion
+readDat.trad is called in line 132 of readDat.r
+HERE102
+[1] "year"      "spawn_bio" "exp_recr"  "with_env"  "adjusted"  "pred_recr"
+[7] "dev"       "biasadj"   "era"      
+
+Error in fmort[seq(spawnseason, nageseason, by = nseason), "Mat.Fec"] <- nma.sorted$"Mat*Fecund"[seq(spawnseason,  : 
+  number of items to replace is not a multiple of replacement length
+Calls: calcBRP -> calcBRP.0 -> calcFAA.ypr
+Execution halted
