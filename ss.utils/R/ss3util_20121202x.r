@@ -2809,7 +2809,7 @@ write.csv(caa_LPS_y,"caa_LPS_y.csv")
 
 
 read.spawner_recruit<-function(report=NULL,repfile="Report.sso",plot=FALSE,versionNo="3.21",
-  new.minor.version=c("04-","04a","04b","10a","10b","10c","10-","11b","11c","11d","20-","20b","21a","21d","23b"),B0=TRUE,lattice=FALSE,layout=c(1,1)){
+  new.minor.version=c("04-","04a","04b","10a","10b","10c","10-","11b","11c","11d","20-","20b","21a","21d","23b","24f"),B0=TRUE,lattice=FALSE,layout=c(1,1)){
 #  cat("enter read.spawner_recruit\n")
   if(lattice && plot)require(lattice)||stop("Package lattice is required")
   if(is.null(report)){
@@ -2862,7 +2862,7 @@ read.spawner_recruit<-function(report=NULL,repfile="Report.sso",plot=FALSE,versi
 #  browser()
   R0<-as.numeric(unlist(strsplit(dat.fields[1],split="[[:blank:]]+"))[3])
 #  browser()
-  if(SRform==1 || SRform==6 && toupper(minor.version) %in% toupper(c("21d","23b")) ){  #  Beverton-Holt flat top for SSB>SSB0
+  if(SRform==1 || SRform==6 && toupper(minor.version) %in% toupper(c("21d","23b","24f")) ){  #  Beverton-Holt flat top for SSB>SSB0
     SRfn<-function(SSB){
       return(ifelse(SSB==0,0,ifelse(SSB>SSB0,SSB0,4*steep*R0*SSB/(SSB0*(1-steep)+SSB*(5*steep-1)))))
     }
@@ -2897,7 +2897,7 @@ read.spawner_recruit<-function(report=NULL,repfile="Report.sso",plot=FALSE,versi
     }
   }
 #  browser()
-  if(SRform>5 && !is.element(toupper(minor.version), toupper(c("21d","23b"))) || (SRform>6 && toupper(minor.version) %in% toupper(c("21d","23b"))) || SRform<1)stop(paste(SRform,"is not defined"))
+  if(SRform>5 && !is.element(toupper(minor.version), toupper(c("21d","23b","24f"))) || (SRform>6 && toupper(minor.version) %in% toupper(c("21d","23b"))) || SRform<1)stop(paste(SRform,"is not defined"))
 
   if(plot)
   {

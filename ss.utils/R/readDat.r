@@ -83,7 +83,7 @@ getComponent<-function(header.char,report=NULL,blankLines=NULL,skip=0,header=FAL
                         skip.col.names=0,checkEndRec=FALSE,colClasses=NULL,as.numeric.as.possible=TRUE,as.numeric.col=NULL){
   if(is.null(report))stop("report is NULL at getCompoent")
   if(!is.null(footer.char)){
-    cat("HERE85 in getComponent\n" )
+ #   cat("HERE85 in getComponent\n" )
     #browser()
     }
   results<-readDat(header.char=header.char,

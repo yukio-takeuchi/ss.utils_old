@@ -208,7 +208,7 @@ readNAA.boot<-function(reports=NULL,bootfiles){#filename,firstYear=1,age0=1){
     names(tmp.long)[9]<-"YQ"
     names(tmp.long)[11:12]<-c("Age","Number")
     array1<-as.array(xtabs(data=tmp.long,formula=Number~YQ     +Age+Gender))
-    array2<-as.array(xtabs(data=tmp.long,formula=Number~Yr+Seas+Age+1Gender))
+    array2<-as.array(xtabs(data=tmp.long,formula=Number~Yr+Seas+Age+Gender))
     return(list(array1=array1,array2=array2))
   }
   lists<-lapply(reports[[1]],tmp.fn)

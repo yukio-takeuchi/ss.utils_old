@@ -1,6 +1,6 @@
 ###################################################################################
 ##
-##  Fmed ‚ðŒvŽZ‚·‚é
+##  Fmed ã‚’è¨ˆç®—ã™ã‚‹
 ##
 
 calcFmed<-function(year,report=NULL,spawnseason,fmult=1,fmodifier=NULL,SR=NULL,range=c(0,5),
@@ -9,12 +9,10 @@ calcFmed<-function(year,report=NULL,spawnseason,fmult=1,fmodifier=NULL,SR=NULL,r
   if(is.null(faa) && is.null(fmort.list)){
     faa<-calFAA.ss3.x(report=report,is.plot=FALSE)
   }
-  if(is.null(fmort.list) && !is.null(faa)){
-    fmort.list<-calcFAA.ypr(faa=faa,fmult=fmult,fmodifier=fmodifier,year=year,
-      spawnseason=spawnseason,R0=R0,debug=debug,geomean=geomean,debug2=debug2)
-  }
+  if(is.null(fmodifier))fmodifier<-rep(1,dim(faa$faa.array)[3]) # 2013/06/04 to prevent error in calcFAA.ypr by no fmodifier
+  
 
-  if(is.null(fmodifier))fmodifier<-rep(1,fmort.list$nfleet)
+  #if(is.null(fmodifier))fmodifier<-rep(1,fmort.list$nfleet) 2013/06/04
   if(is.null(SR)){
     if(!is.null(report)){
       SR<-read.spawner_recruit(report=report,plot=FALSE)
@@ -25,6 +23,11 @@ calcFmed<-function(year,report=NULL,spawnseason,fmult=1,fmodifier=NULL,SR=NULL,r
   if(!is.null(SRfn))SR$SRfn<-SRfn
   R0<-SR$R0
   SSB0<-SR$SSB0
+
+if(is.null(fmort.list) && !is.null(faa)){
+    fmort.list<-calcFAA.ypr(faa=faa,fmult=fmult,fmodifier=fmodifier,year=year,
+      spawnseason=spawnseason,R0=R0,debug=debug,geomean=geomean,debug2=debug2)
+  }
 
   RPSmed<-median(SR$sr[SR$sr[,9]=="Main","RPS"])
   SPRmed<-1/RPSmed
@@ -56,5 +59,5 @@ calcFmed<-function(year,report=NULL,spawnseason,fmult=1,fmodifier=NULL,SR=NULL,r
     ypr$Yield<-NA
     ypr$Req<-NA
   }
-  return(ypr)
+  return(invisible(ypr))
 }

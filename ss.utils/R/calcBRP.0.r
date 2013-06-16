@@ -1,4 +1,4 @@
-#### 2010/02/23 Floss ‚ÌŒvZ‚à‘g‚İ‚ñ‚¾
+#### 2010/02/23 Floss ã®è¨ˆç®—ã‚‚çµ„ã¿è¾¼ã‚“ã 
 #### 2010/10/09 Inplemented calculation of FMSY given S-R relationship
 #### 2011/03/21 chenged return value to list of F-BRPs, B-BRPs and associated results of calculations
 calcBRP.0<-function(runname,report=NULL,year,spawnseason=4,fmodifier,Fmax=TRUE,FSPR=c(10,20,30,40),F0.1=TRUE,
@@ -56,8 +56,9 @@ calcBRP.0<-function(runname,report=NULL,year,spawnseason=4,fmodifier,Fmax=TRUE,F
     F_Perc_SPR<-numeric(length(FSPR))
     yprSPR<-list()
     for (i in 1:length(FSPR)){
+      cat(paste("F",FSPR[i],"%\n",sep=""))
       F_Perc_SPR[i]<-SPR2fmult(perc_spr=FSPR[i]/100.0,faa=faa,year=year,R0=R0,spawnseason=spawnseason,
-        fmodifier=fmodifier,range=range,tol=tol,debug=debug,geomean=geomean,percent=TRUE)
+        fmodifier=fmodifier,range=range,tol=tol,debug=debug,geomean=geomean,percent=TRUE,debug2=debug2)
       yprSPR[[i]]<-getFmort.ypr.0(fmult=F_Perc_SPR[i],fmodifier=fmodifier,year=year,faa=faa,
         fmort.list=fmort.list,R0=R0,spawnseason=spawnseason)
       if(calcB){

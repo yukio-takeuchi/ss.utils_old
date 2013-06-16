@@ -1,8 +1,8 @@
 Package: ss.utils
 Type: Package
 Title: set of small functions useful with SS
-Version: 0.9983
-Date: 2013-3-5
+Version: 0.9986
+Date: 2013-6-4
 Author: person("Takeuchi", "Yukio",email="yukiot at fra.affrc.go.jp")
 Maintainer: Yukio Takeuchi <yukiot@fra.affrc.go.jp>
 Depends:plyr
@@ -51,5 +51,9 @@ Description: set of small function to be used with SS
             2013/01/26 version 0.9981 Started to use Rstudio and git
             2013/02/20 version 0.9981 fixed bug in calcFAA.ypr
             2013/03/05 version 0.9983 Some refactoring of source codes
+            2013/05/20 version 0.9984 fixed bug in read.spawner_recruit
+            2013/05/21 version 0.9985 Byte compilation when the packaged is installed was enabled
+            2013/06/04 version 0.9986 Fixed calcFmed to avoid error whend called alone
 License: BSD
 LazyLoad: yes
+ByteCompile:TRUE

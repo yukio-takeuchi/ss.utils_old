@@ -320,17 +320,28 @@ SPR2fmult<-SPR2fmult.20100210<-function(spr=NA,perc_spr=NA,faa=NULL,year,R0=1,sp
             fmort.list=fmort.list,fmodifier=fmodifier,geomean=geomean,debug2=debug2)
   sprHigh<-calcSPR.ypr(faa=faa,year=year,fmult=fmultHigh,R0=R0,spawnseason=spawnseason,
             fmort.list=fmort.list,fmodifier=fmodifier,geomean=geomean,debug2=debug2)
+  if(debug2){
+    if(percent){
+      cat("sprLow=",sprLow$perc_spr,"sprHigh=",sprHigh$perc_spr,"\n")
+    }else{
+      cat("sprLow=",sprLow$spr,"sprHigh=",sprHigh$spr,"\n")
+    }
+  }
 #  if(debug2){cat("in SPR2fmult\n");browser()}
 ##########################################################################
   fnc<-function(x){
     if(!percent){
       val<-spr-calcSPR.ypr(faa=faa,year=year,fmult=x,R0=R0,spawnseason=spawnseason,
                     fmort.list=fmort.list,fmodifier=fmodifier,geomean=geomean)$spr
+      
     }else{
+      if(debug2)spr<-perc_spr
       val<-perc_spr-calcSPR.ypr(faa=faa,year=year,fmult=x,R0=R0,spawnseason=spawnseason,
                     fmort.list=fmort.list,fmodifier=fmodifier,geomean=geomean)$perc_spr
     }
-    if(debug2)cat("x=",x,", val=",val," spr=",spr,"\n")
+    if(debug2){
+      cat("x=",x,", val=",val," spr=",spr,"\n")
+    }
     return(val)
   }
 #  browser()
