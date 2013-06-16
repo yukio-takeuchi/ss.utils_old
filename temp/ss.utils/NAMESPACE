@@ -1,4 +1,0 @@
-export(calcFAA,getNAA,getCAA,calcBRP,calcFmed,calcFloss,calcFMSY,getAgecomp,getFAA.y,getCAA.y,
-	getNAA.y,print.BRPnew,make.SRfn,getReport,summarySS,plotChiSq,plotFAA.y,plotNAA.y,do.boot,makeCPUEfit,plotFAA.y3d,plotFAA.y,
-	calc.aggregateF,getFmort.ypr.0,getFmort.ypr,calcFAA.ypr,checkSSversion,getNMA,calcFmax,read.spawner_recruit,readDat,readDat.trad,
-       getComponent,plotComps.lattice,getMorphIndexing)
